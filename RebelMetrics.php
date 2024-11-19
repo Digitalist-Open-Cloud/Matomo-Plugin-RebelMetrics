@@ -21,20 +21,45 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
+use Piwik\Common;
+use Piwik\Db;
+use Exception;
+
 class RebelMetrics extends \Piwik\Plugin
 {
-    public function registerEvents()
+    public const PLUGIN_NAME = "RebelMetrics";
+    public static $statusTable = 'rebelmetrics_status';
+
+    /**
+     * Runs when the RebelMetrics is installed, adds table.
+     */
+    public function install()
     {
-        return [
-            'CronArchive.getArchivingAPIMethodForPlugin' => 'getArchivingAPIMethodForPlugin',
-        ];
+        try {
+            $sql = "CREATE TABLE " . Common::prefixTable(self::$statusTable) . " (
+                        id INT NOT NULL AUTO_INCREMENT
+                        , date datetime NOT NULL
+                        , status VARCHAR(100) NOT NULL
+                        , size VARCHAR(256) NOT NULL
+                        , done datetime
+                        , PRIMARY KEY (id)
+                    ) DEFAULT CHARSET=utf8mb4";
+            // phpcs:disable
+            Db::exec($sql);
+            // phpcs:enable
+        } catch (Exception $e) {
+            // ignore error if table already exists (1050 code is for 'table already exists')
+            if (!Db::get()->isErrNo($e, '1050')) {
+                throw $e;
+            }
+        }
     }
 
-    // support archiving just this plugin via core:archive
-    public function getArchivingAPIMethodForPlugin(&$method, $plugin)
+    /**
+     * Runs when the RebelMetrics is uninstalled, removing the table.
+     */
+    public function uninstall()
     {
-        if ($plugin == 'RebelMetrics') {
-            $method = 'RebelMetrics.getExampleArchivedMetric';
-        }
+        Db::dropTables(Common::prefixTable(self::$statusTable));
     }
 }

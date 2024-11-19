@@ -21,28 +21,13 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
-use Piwik\Menu\MenuAdmin;
 use Piwik\Menu\MenuTop;
+use Piwik\Plugin\Menu as MatomoMenu;
 
-/**
- * This class allows you to add, remove or rename menu items.
- * To configure a menu (such as Admin Menu, Top Menu, User Menu...) simply call the corresponding methods as
- * described in the API-Reference http://developer.piwik.org/api-reference/Piwik/Menu/MenuAbstract
- */
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends MatomoMenu
 {
     public function configureTopMenu(MenuTop $menu)
     {
-        // $menu->addItem('RebelMetrics_MyTopItem', null, $this->urlForDefaultAction(), $orderId = 30);
-    }
-
-    public function configureAdminMenu(MenuAdmin $menu)
-    {
-        // reuse an existing category. Execute the showList() method within the controller when menu item was clicked
-        // $menu->addManageItem('RebelMetrics_MyUserItem', $this->urlForAction('showList'), $orderId = 30);
-        // $menu->addPlatformItem('RebelMetrics_MyUserItem', $this->urlForDefaultAction(), $orderId = 30);
-
-        // or create a custom category
-        // $menu->addItem('CoreAdminHome_MenuManage', 'RebelMetrics_MyUserItem', $this->urlForDefaultAction(), $orderId = 30);
+        $menu->addItem('RebelMetrics_RebelMetrics', null, $this->urlForDefaultAction(), $orderId = 30);
     }
 }

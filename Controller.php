@@ -21,6 +21,8 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
+use Piwik\Plugins\RebelMetrics\Checks;
+
 /**
  * A controller lets you for example create a page that can be added to a menu. For more information read our guide
  * http://developer.piwik.org/guides/mvc-in-piwik or have a look at the our API references for controller and view:
@@ -31,9 +33,15 @@ class Controller extends \Piwik\Plugin\Controller
 {
     public function index()
     {
-        // Render the Twig template templates/index.twig and assign the view variable answerToLife to the view.
-        return $this->renderTemplate('index', array(
-            'answerToLife' => 42
-        ));
+        $check = new Checks();
+        $exportWrite = $check->isExportWriteable();
+        if ($exportWrite) {
+            $exportWrite = 'Yes';
+        } else {
+            $exportWrite = 'No';
+        }
+        return $this->renderTemplate('index', [
+            'exportWrite' => $exportWrite
+        ]);
     }
 }

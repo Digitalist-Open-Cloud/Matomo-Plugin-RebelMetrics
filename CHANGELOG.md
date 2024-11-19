@@ -1,3 +1,3 @@
-## Changelog
+# Change log
 
-Here goes the changelog text.
+

@@ -1,0 +1,22 @@
+#topmenu-docsupport {
+  background-color: black;
+}
+
+#mobile-top-menu #topmenu-docsupport {
+  color: white;
+}
+
+#topmenu-docsupport:after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  background: url('plugins/DocSupport/assets/images/dot.png') 0 0 no-repeat;
+  background-size: contain;
+}
+
+.widget_doc_support img {
+  width: 60%;
+  height: auto;
+}

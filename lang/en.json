@@ -1,0 +1,8 @@
+{
+  "RebelMetrics": {
+      "RebelMetrics": "RebelMetrics",
+      "Requirements": "This plugin requires <a href='https://en.digitalist.cloud/signup/rebelmetrics'>a subscription to the RebelMetrics service</a> from Digitalist Open Cloud to function, without this, nothing will happen.",
+      "Checks": "Checks",
+      "TempfolderWriteable": "Temp folder for RebelMetrics is writeable"
+  }
+}
