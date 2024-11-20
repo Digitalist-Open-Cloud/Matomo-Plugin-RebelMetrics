@@ -3,6 +3,11 @@
       "RebelMetrics": "RebelMetrics",
       "Requirements": "This plugin requires <a href='https://en.digitalist.cloud/signup/rebelmetrics'>a subscription to the RebelMetrics service</a> from Digitalist Open Cloud to function, without this, nothing will happen.",
       "Checks": "Checks",
-      "TempfolderWriteable": "Temp folder for RebelMetrics is writeable"
+      "ExportFolderWriteable": "Export folder is writeable",
+      "GzipExists": "Gzip extension exists in PHP",
+      "S3LibExists": "Upload code exists.",
+      "StorageIsValid": "External storage works and could be written to.",
+      "CanCreateGzip": "Can write file, gzip and remove.",
+      "IsQueryPresent": "The export query is present"
   }
 }

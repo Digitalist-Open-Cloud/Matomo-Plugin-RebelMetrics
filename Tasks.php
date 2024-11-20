@@ -26,6 +26,9 @@ use Psr\Log\LoggerInterface;
 use Piwik\Container\StaticContainer;
 use Exception;
 use Piwik\Scheduler\RetryableException;
+use Piwik\Plugins\RebelMetrics\Exporter;
+use Piwik\Plugins\RebelMetrics\Rebel;
+use Piwik\Plugins\RebelMetrics\SystemSettings;
 
 class Tasks extends Task
 {
@@ -45,22 +48,25 @@ class Tasks extends Task
 
     public function schedule()
     {
-        $this->daily('export', null, self::HIGH_PRIORITY);
-        $this->daily('cleanup', null, self::LOWEST_PRIORITY);
+        $this->daily('rebelExport', null, self::HIGH_PRIORITY);
+        $this->daily('rebelCleanup', null, self::LOWEST_PRIORITY);
     }
 
-    public function export()
+    public function rebelExport()
     {
         $this->logger->info('Starting RebelMetrics export');
+        $settings = new SystemSettings();
         try {
-            // do something
+            $exporter = new Exporter($settings);
+            $exporter->doExport();
             $this->logger->info('RebelMetrics export done');
         } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
             throw new RetryableException($e->getMessage());
         }
     }
 
-    public function cleanup()
+    public function rebelCleanup()
     {
         $this->logger->info('Starting RebelMetrics cleanup');
         try {

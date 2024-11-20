@@ -21,27 +21,31 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
-use Piwik\Plugins\RebelMetrics\Checks;
+use Piwik\Plugins\RebelMetrics\Rebel;
+use Piwik\Plugins\RebelMetrics\SystemSettings;
+use Piwik\Plugins\RebelMetrics\Exporter;
+use Piwik\Plugins\TagManager\API\Export;
 
-/**
- * A controller lets you for example create a page that can be added to a menu. For more information read our guide
- * http://developer.piwik.org/guides/mvc-in-piwik or have a look at the our API references for controller and view:
- * http://developer.piwik.org/api-reference/Piwik/Plugin/Controller and
- * http://developer.piwik.org/api-reference/Piwik/View
- */
 class Controller extends \Piwik\Plugin\Controller
 {
     public function index()
     {
-        $check = new Checks();
-        $exportWrite = $check->isExportWriteable();
-        if ($exportWrite) {
-            $exportWrite = 'Yes';
-        } else {
-            $exportWrite = 'No';
-        }
-        return $this->renderTemplate('index', [
-            'exportWrite' => $exportWrite
-        ]);
+        $settings = new SystemSettings();
+        $check = new Rebel($settings);
+        $checks = [
+            'exportWrite' => $this->getStatusIcon($check->isExportWriteable()),
+            'gzipExists' => $this->getStatusIcon($check->isGzipAvailable()),
+            's3LibExists' => $this->getStatusIcon($check->isS3ClassAvailable()),
+            'storageValid' => $this->getStatusIcon($check->isStorageValid()),
+            'isGzipable' => $this->getStatusIcon($check->isGzipable()),
+            'isQueryPresent' => $this->getStatusIcon($check->isQueryPresent()),
+        ];
+
+        return $this->renderTemplate('index', $checks);
+    }
+
+    private function getStatusIcon($condition)
+    {
+        return $condition ? '<span class="icon-ok" title="Test passed"></span>' : '<span class="icon-error" title="Test failed"></span>';
     }
 }

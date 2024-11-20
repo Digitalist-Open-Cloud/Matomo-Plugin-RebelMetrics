@@ -43,17 +43,31 @@ class SystemSettings extends MatomoSettings
     /** @var Setting */
     public $storageSecret;
 
+    /** @var Setting */
+    public $project;
+
     protected function init()
     {
+        $this->project = $this->createStorageProject();
+        $this->storage = $this->createStorageSetting();
         $this->storageKey = $this->createStorageKeySetting();
         $this->storageSecret = $this->createStorageSecretSetting();
         $this->exportDir = $this->createExportDirSetting();
-        $this->storage = $this->createStorageSetting();
     }
 
+
+    private function createStorageProject()
+    {
+        return $this->makeSetting('project', null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
+            $field->title = 'Project name';
+            $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
+            $field->description = 'This information you should have gotten when subscribing to the service.';
+            $field->validators[] = new NotEmpty();
+        });
+    }
     private function createStorageSetting()
     {
-        $default = "rebelstorage.nbg1.your-objectstorage.com";
+        $default = "https://nbg1.your-objectstorage.com";
 
         return $this->makeSetting('storage', $default, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
             $field->title = 'Storage for your RebelMetrics.';

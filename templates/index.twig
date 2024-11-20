@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-content">
             <div style="float:right">
-                <a style="text-decoration:none" href="https://www.digitalist.se/">
+                <a style="text-decoration:none" href="https://digitalist.cloud/">
                 <img src="plugins/RebelMetrics/assets/images/dot.png" height="40" />
                 </a>
             </div>
@@ -21,9 +21,40 @@
         <div class="card">
             <div class="card-content">
                 <h2 class="card-title">{{ 'RebelMetrics_Checks'|translate }}</h2>
-                <p>
-                    {{ 'RebelMetrics_TempfolderWriteable'|translate }}: {{ exportWrite }}
-                </p>
+                <table class="card card-table entityTable">
+                    <thead>
+                    <tr>
+                      <th>Name of check</th>
+                      <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>{{ 'RebelMetrics_ExportFolderWriteable'|translate }}</td>
+                      <td>{{ exportWrite|raw }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ 'RebelMetrics_GzipExists'|translate }}</td>
+                      <td>{{ gzipExists|raw }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ 'RebelMetrics_S3LibExists'|translate }}</td>
+                      <td>{{ s3LibExists|raw }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'RebelMetrics_StorageIsValid'|translate }}</td>
+                        <td>{{ storageValid|raw }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'RebelMetrics_CanCreateGzip'|translate }}</td>
+                        <td>{{ isGzipable|raw }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'RebelMetrics_IsQueryPresent'|translate }}</td>
+                        <td>{{ isQueryPresent|raw }}</td>
+                    </tr>
+                    </tbody>
+                    </table>
             </div>
         </div>
     <div>
