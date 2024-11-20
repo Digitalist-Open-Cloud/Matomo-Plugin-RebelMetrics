@@ -56,7 +56,6 @@ class Exporter
         try {
             $results = Db::fetchAll($query, [$day]);
         } catch (\Exception $e) {
-
             echo "An error occurred: " . $e->getMessage();
         }
 

@@ -25,7 +25,6 @@ require_once(PIWIK_INCLUDE_PATH . '/plugins/RebelMetrics/vendor/autoload.php');
 use Aws\S3\S3Client;
 use Exception;
 use Piwik\Plugins\RebelMetrics\GetQuery;
-use Piwik\Db;
 
 
 class Rebel
@@ -44,15 +43,6 @@ class Rebel
         $exportDir = $this->settings->exportDir->getValue();
         $writeAble = is_writable($exportDir);
         return $writeAble;
-    }
-
-    public function isConnectable()
-    {
-        $region = 'us-west-2';
-        $client = new S3Client([
-        'region' => $region,
-        ]);
-       // check if we can connect and put a file and delete it in s3.
     }
 
     public function isGzipAvailable()
@@ -88,15 +78,10 @@ class Rebel
             file_put_contents("$exportDir/test.txt.gz", $gzData);
             unlink("$exportDir/test.txt");
             unlink("$exportDir/test.txt.gz");
-
             return true;
         } catch (Exception $e) {
-            //die ('File did not upload: ' . $e->getMessage());
             return false;
         }
-
-
-       // check if we can gzip a test file in exportdir and delete it.
     }
 
     public function isStorageValid()

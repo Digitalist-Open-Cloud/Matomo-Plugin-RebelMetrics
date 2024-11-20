@@ -19,4 +19,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-return [];
+return [
+     'diagnostics.optional' => Piwik\DI::add([
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\ExportDirectoryIsWriteable'),
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\GzipAvailable'),
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\S3ClassAvailable'),
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\Gzipable'),
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\StorageValid'),
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\QueryPresent'),
+     ]),
+];

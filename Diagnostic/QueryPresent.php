@@ -23,21 +23,38 @@ namespace Piwik\Plugins\RebelMetrics\Diagnostic;
 
 use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
 use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Piwik\Plugins\RebelMetrics\Rebel;
+use Piwik\Plugins\RebelMetrics\SystemSettings;
+use Piwik\Translation\Translator;
 
-class ExportdirectoryiswriteableCheck implements Diagnostic
+class QueryPresent implements Diagnostic
 {
+   /**
+     * @var Translator
+     */
+    private $translator;
+
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+    }
     public function execute()
     {
         $result = [];
+        $settings = new SystemSettings();
+        $label = $this->translator->translate('RebelMetrics_DiagnosticPrefix') .
+          $this->translator->translate('RebelMetrics_IsQueryPresent');
+        $check = new Rebel($settings);
+        $file = $check->isQueryPresent();
+        if ($file) {
+            $status = DiagnosticResult::STATUS_OK;
+            $comment = 'Database query for export is present';
+        } else {
+            $status = DiagnosticResult::STATUS_ERROR;
+            $comment = 'Database query for export is not present, contact support@digitalist.cloud';
+        }
 
-        $label = 'Export directory is writeable';
-        $status = DiagnosticResult::STATUS_OK; // can be ok, error, warning or informational
-        $comment = 'A comment for this check';
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);
-
-        $label = 'Example Information';
-        $comment = 'The PHP version is ' . PHP_VERSION;
-        $result[] = DiagnosticResult::informationalResult($label, $status, $comment);
 
         return $result;
     }

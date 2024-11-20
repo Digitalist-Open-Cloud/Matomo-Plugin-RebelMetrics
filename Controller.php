@@ -23,8 +23,6 @@ namespace Piwik\Plugins\RebelMetrics;
 
 use Piwik\Plugins\RebelMetrics\Rebel;
 use Piwik\Plugins\RebelMetrics\SystemSettings;
-use Piwik\Plugins\RebelMetrics\Exporter;
-use Piwik\Plugins\TagManager\API\Export;
 
 class Controller extends \Piwik\Plugin\Controller
 {
