@@ -26,7 +26,6 @@ use Aws\S3\S3Client;
 use Exception;
 use Piwik\Plugins\RebelMetrics\GetQuery;
 
-
 class Rebel
 {
     /**
@@ -79,13 +78,14 @@ class Rebel
             unlink("$exportDir/test.txt");
             unlink("$exportDir/test.txt.gz");
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
     public function isStorageValid()
     {
+        $exportDir = $this->settings->exportDir->getValue();
         $storage = $this->settings->storage->getValue();
         $key = $this->settings->storageKey->getValue();
         $secret = $this->settings->storageSecret->getValue();
@@ -108,12 +108,13 @@ class Rebel
         $get = $client->getObject([
         'Bucket' => $bucket,
         'Key'    => 'testfile',
-        'SaveAs' => '/tmp/testfile_local'
+        'SaveAs' => "$exportDir/testfile_local"
         ]);
         $delete = $client->deleteObject([
           'Bucket' => $bucket,
           'Key'    => 'testfile',
         ]);
+        unlink("$exportDir/testfile_local");
 
         if ($get['Body'] == 'Hello from RebelMetrics') {
             return true;
