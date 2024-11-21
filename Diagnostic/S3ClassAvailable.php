@@ -48,10 +48,10 @@ class S3ClassAvailable implements Diagnostic
         $s3 = $check->isS3ClassAvailable();
         if ($s3) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'Upload library exists.';
+            $comment = $this->translator->translate('RebelMetrics_S3LibExistsOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'Upload library does not exist.';
+            $comment = $this->translator->translate('RebelMetrics_S3LibExistsError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);

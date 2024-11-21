@@ -23,6 +23,7 @@ namespace Piwik\Plugins\RebelMetrics;
 
 use Piwik\Plugins\RebelMetrics\Rebel;
 use Piwik\Plugins\RebelMetrics\SystemSettings;
+use Piwik\Piwik;
 
 class Controller extends \Piwik\Plugin\Controller
 {
@@ -44,6 +45,13 @@ class Controller extends \Piwik\Plugin\Controller
 
     private function getStatusIcon($condition)
     {
-        return $condition ? '<span class="icon-ok" title="Test passed"></span>' : '<span class="icon-error" title="Test failed"></span>';
+
+        $ok = Piwik::translate('RebelMetrics_TestPassed');
+        $error = Piwik::translate('RebelMetrics_TestFailed');
+
+        $passed = '<span class="icon-ok" title="' . $ok . '"></span>';
+        $failed = '<span class="icon-error" title="' . $error . '"></span>';
+
+        return $condition ? $passed : $failed;
     }
 }

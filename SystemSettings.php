@@ -21,10 +21,12 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
+use Piwik\Piwik;
 use Piwik\Settings\Setting;
 use Piwik\Settings\FieldConfig;
 use Piwik\Validators\NotEmpty;
 use Piwik\Settings\Plugin\SystemSettings as MatomoSettings;
+use DateTime;
 
 /**
  * Defines settings for RebelMetrics.
@@ -46,63 +48,93 @@ class SystemSettings extends MatomoSettings
     /** @var Setting */
     public $project;
 
+    /** @var Setting */
+    public $exportHistoricalData;
+
+    /** @var Setting */
+    public $historicalDataDate;
+
     protected function init()
     {
-        $this->project = $this->createStorageProject();
-        $this->storage = $this->createStorageSetting();
-        $this->storageKey = $this->createStorageKeySetting();
-        $this->storageSecret = $this->createStorageSecretSetting();
-        $this->exportDir = $this->createExportDirSetting();
+        $this->project = $this->storageProject();
+        $this->storage = $this->storageSetting();
+        $this->storageKey = $this->storageKeySetting();
+        $this->storageSecret = $this->storageSecretSetting();
+        $this->exportDir = $this->exportDirSetting();
+        $this->exportHistoricalData = $this->exportHistoricalData();
+        $this->historicalDataDate = $this->historicalDataDate();
     }
 
+    private function exportHistoricalData()
+    {
+        return $this->makeSetting('exportHistoricalData', null, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
+            $field->title = Piwik::translate('RebelMetrics_ExportHistoricalData');
+            $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
+            $field->description = Piwik::translate('RebelMetrics_ExportHistoricalDataDescription');
+        });
+    }
+    private function historicalDataDate()
+    {
+        return $this->makeSetting('historicalDataDate', null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
+            $field->title = Piwik::translate('RebelMetrics_ExportFrom');
+            $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
+            $field->description = Piwik::translate('RebelMetrics_ExportFromDescription');
+            $field->condition = 'exportHistoricalData';
+            $field->validate = function ($value, $setting) {
+                if (!empty($value) && !$this->isValidDate($value)) {
+                    throw new \Exception(Piwik::translate('RebelMetrics_ExportFromValidate'));
+                }
+            };
+        });
+    }
 
-    private function createStorageProject()
+    private function storageProject()
     {
         return $this->makeSetting('project', null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = 'Project name';
+            $field->title = Piwik::translate('RebelMetrics_ProjectName');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = 'This information you should have gotten when subscribing to the service.';
-            $field->validators[] = new NotEmpty();
+            $field->description = Piwik::translate('RebelMetrics_ProjectNameDescription');
         });
     }
-    private function createStorageSetting()
+    private function storageSetting()
     {
-        $default = "https://nbg1.your-objectstorage.com";
-
-        return $this->makeSetting('storage', $default, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = 'Storage for your RebelMetrics.';
+        return $this->makeSetting('storage', null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
+            $field->title = Piwik::translate('RebelMetrics_Storage');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = 'This information you should have gotten when subscribing to the service.';
-            $field->validators[] = new NotEmpty();
+            $field->description = Piwik::translate('RebelMetrics_StorageDescription');
         });
     }
 
-    private function createExportDirSetting()
+    private function exportDirSetting()
     {
         $default = "/tmp";
-
         return $this->makeSetting('exportDir', $default, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = 'Export directory path.';
+            $field->title = Piwik::translate('RebelMetrics_ExportDirectory');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = 'Path for exports from Matomo. This needs to be writeable by Matomo.';
-            $field->validators[] = new NotEmpty();
+            $field->description = Piwik::translate('RebelMetrics_ExportDirectoryDescription');
         });
     }
 
-    private function createStorageKeySetting()
+    private function storageKeySetting()
     {
         return $this->makeSetting('storageKey', $default = null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = 'Storage key for RebelMetrics';
+            $field->title = Piwik::translate('RebelMetrics_Key');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = 'This needs the Storage key you would have gotten when subscribing to RebelMetrics';
+            $field->description = Piwik::translate('RebelMetrics_KeyDescription');
         });
     }
-    private function createStorageSecretSetting()
+    private function storageSecretSetting()
     {
         return $this->makeSetting('storageSecret', $default = null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = 'Storage secret for RebelMetrics';
+            $field->title = Piwik::translate('RebelMetrics_Secret');
             $field->uiControl = FieldConfig::UI_CONTROL_PASSWORD;
-            $field->description = 'This needs the storage secret you would have gotten when subscribing to RebelMetrics';
+            $field->description = Piwik::translate('RebelMetrics_SecretDescription');
         });
+    }
+
+    private function isValidDate($date)
+    {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
     }
 }

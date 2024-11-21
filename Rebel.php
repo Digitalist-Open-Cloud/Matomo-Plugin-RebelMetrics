@@ -52,13 +52,17 @@ class Rebel
 
     public function isS3ClassAvailable()
     {
-        $region = 'eu-central-1';
-        $client = new S3Client([
-        'region' => $region,
-        ]);
-        if ($client) {
-            return true;
-        } else {
+        try {
+            $region = 'eu-central-1';
+            $client = new S3Client([
+            'region' => $region,
+            ]);
+            if ($client) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -85,40 +89,44 @@ class Rebel
 
     public function isStorageValid()
     {
-        $exportDir = $this->settings->exportDir->getValue();
-        $storage = $this->settings->storage->getValue();
-        $key = $this->settings->storageKey->getValue();
-        $secret = $this->settings->storageSecret->getValue();
-        $bucket = $this->settings->project->getValue();
-        $region = 'us-east-1';
-        $client = new S3Client([
-          'version' => 'latest',
-          'region' => $region,
-          'endpoint' => $storage,
-          'credentials' => [
-            'key'    => $key,
-            'secret' => $secret,
-          ],
-        ]);
-        $upload = $client->putObject([
-        'Bucket' => $bucket,
-        'Key'    => 'testfile',
-        'Body'   => 'Hello from RebelMetrics'
-        ]);
-        $get = $client->getObject([
-        'Bucket' => $bucket,
-        'Key'    => 'testfile',
-        'SaveAs' => "$exportDir/testfile_local"
-        ]);
-        $delete = $client->deleteObject([
-          'Bucket' => $bucket,
-          'Key'    => 'testfile',
-        ]);
-        unlink("$exportDir/testfile_local");
+        try {
+            $exportDir = $this->settings->exportDir->getValue();
+            $storage = $this->settings->storage->getValue();
+            $key = $this->settings->storageKey->getValue();
+            $secret = $this->settings->storageSecret->getValue();
+            $bucket = $this->settings->project->getValue();
+            $region = 'us-east-1';
+            $client = new S3Client([
+              'version' => 'latest',
+              'region' => $region,
+              'endpoint' => $storage,
+              'credentials' => [
+                'key'    => $key,
+                'secret' => $secret,
+              ],
+            ]);
+            $upload = $client->putObject([
+            'Bucket' => $bucket,
+            'Key'    => 'testfile',
+            'Body'   => 'Hello from RebelMetrics'
+            ]);
+            $get = $client->getObject([
+            'Bucket' => $bucket,
+            'Key'    => 'testfile',
+            'SaveAs' => "$exportDir/testfile_local"
+            ]);
+            $delete = $client->deleteObject([
+              'Bucket' => $bucket,
+              'Key'    => 'testfile',
+            ]);
+            unlink("$exportDir/testfile_local");
 
-        if ($get['Body'] == 'Hello from RebelMetrics') {
-            return true;
-        } else {
+            if ($get['Body'] == 'Hello from RebelMetrics') {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -137,77 +145,4 @@ class Rebel
             return false;
         }
     }
-
-    // public function doExport()
-    // {
-    //     $settings = new SystemSettings();
-    //     $exportDir = $this->settings->exportDir->getValue();
-    //     $queryProcessor = new GetQuery($settings);
-
-    //     try {
-    //         $query = $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
-    //     } catch (\Exception $e) {
-    //         echo "An error occurred: " . $e->getMessage();
-    //     }
-
-    //     $day = date('Y-m-d');
-
-    //     try {
-    //         $results = Db::fetchAll($query, [$day]);
-    //     } catch (\Exception $e) {
-
-    //         echo "An error occurred: " . $e->getMessage();
-    //     }
-
-    //     $filePath = "$exportDir/$day.csv";
-    //     $file = fopen($filePath, 'w');
-
-    //     if ($file === false) {
-    //         die('Error opening the file for writing.');
-    //     }
-
-    //     try {
-    //         // If $results is not empty, write the headers
-    //         if (!empty($results)) {
-    //             // Write the header row (column names) to the CSV file
-    //             fputcsv($file, array_keys($results[0]));
-
-    //             // Write each row of data
-    //             foreach ($results as $row) {
-    //                 fputcsv($file, $row);
-    //             }
-    //         }
-    //     } catch (\Exception $e) {
-    //         echo "An error occurred while writing to the file: " . $e->getMessage();
-    //     } finally {
-    //         // Close the file after writing
-    //         fclose($file);
-    //     }
-
-    //     $gzip = file_get_contents("$filePath");
-    //     $gzData = gzencode($gzip, 9);
-    //     file_put_contents("$filePath.gz", $gzData);
-    //     unlink("$filePath");
-
-    //     $storage = $this->settings->storage->getValue();
-    //     $key = $this->settings->storageKey->getValue();
-    //     $secret = $this->settings->storageSecret->getValue();
-    //     $bucket = $this->settings->project->getValue();
-    //     $region = 'us-east-1';
-    //     $client = new S3Client([
-    //       'version' => 'latest',
-    //       'region' => $region,
-    //       'endpoint' => $storage,
-    //       'credentials' => [
-    //         'key'    => $key,
-    //         'secret' => $secret,
-    //       ],
-    //     ]);
-    //     $upload = $client->putObject([
-    //       'Bucket' => $bucket,
-    //       'Key'    => "$day.csv.gz",
-    //       'SourceFile' => "$filePath.gz",
-    //     ]);
-    //     unlink("$filePath.gz");
-    // }
 }

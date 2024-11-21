@@ -48,10 +48,10 @@ class GzipAvailable implements Diagnostic
         $gzip = $check->isGzipAvailable();
         if ($gzip) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'Gzip PHP extension exists.';
+            $comment = $this->translator->translate('RebelMetrics_GzipExistsOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'Gzip PHP extension does not exist.';
+            $comment = $this->translator->translate('RebelMetrics_GzipExistsError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);

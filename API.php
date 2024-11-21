@@ -21,12 +21,7 @@
 
 namespace Piwik\Plugins\RebelMetrics;
 
-use Piwik\Archive;
-use Piwik\DataTable;
 use Piwik\Piwik;
-use Piwik\Plugins\RebelMetrics\RecordBuilders\ExampleMetric;
-use Piwik\Plugins\RebelMetrics\RecordBuilders\ExampleMetric2;
-use Piwik\Segment;
 
 /**
  * API for plugin RebelMetrics
@@ -35,5 +30,4 @@ use Piwik\Segment;
  */
 class API extends \Piwik\Plugin\API
 {
-
 }

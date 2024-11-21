@@ -48,10 +48,10 @@ class QueryPresent implements Diagnostic
         $file = $check->isQueryPresent();
         if ($file) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'Database query for export is present';
+            $comment = $this->translator->translate('RebelMetrics_IsQueryPresentOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'Database query for export is not present, contact support@digitalist.cloud';
+            $comment = $this->translator->translate('RebelMetrics_IsQueryPresentError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);

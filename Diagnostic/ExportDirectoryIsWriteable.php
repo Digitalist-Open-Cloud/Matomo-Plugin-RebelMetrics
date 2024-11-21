@@ -48,10 +48,10 @@ class ExportDirectoryIsWriteable implements Diagnostic
         $canWrite = $check->isExportWriteable();
         if ($canWrite) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'Plugin can write to defined directory.';
+            $comment = $this->translator->translate('RebelMetrics_ExportFolderWriteableOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'Plugin can not write to defined directory.';
+            $comment = $this->translator->translate('RebelMetrics_ExportFolderWriteableError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);

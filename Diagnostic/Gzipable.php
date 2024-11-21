@@ -48,10 +48,10 @@ class Gzipable implements Diagnostic
         $file = $check->isGzipable();
         if ($file) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'File can be compressed with gzip.';
+            $comment = $this->translator->translate('RebelMetrics_CanCreateGzipOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'File can not be compressed with gzip';
+            $comment = $this->translator->translate('RebelMetrics_CanCreateGzipError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);

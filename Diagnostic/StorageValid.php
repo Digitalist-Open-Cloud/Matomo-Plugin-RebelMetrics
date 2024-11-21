@@ -48,10 +48,10 @@ class StorageValid implements Diagnostic
         $file = $check->isStorageValid();
         if ($file) {
             $status = DiagnosticResult::STATUS_OK;
-            $comment = 'Can connect and upload file.';
+            $comment = $this->translator->translate('RebelMetrics_StorageIsValidOk');
         } else {
             $status = DiagnosticResult::STATUS_ERROR;
-            $comment = 'Can not connect and upload file.';
+            $comment = $this->translator->translate('RebelMetrics_StorageIsValidError');
         }
 
         $result[] = DiagnosticResult::singleResult($label, $status, $comment);
