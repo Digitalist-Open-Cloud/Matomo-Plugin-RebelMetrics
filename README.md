@@ -17,3 +17,22 @@ This plugin is developed by Digitalist Open Cloud.
 ## Support
 
 Please contact <rebelmetrics@digitalist.com>.
+
+## Included packages
+
+These packages is used by this plugin.
+
+| Package Name                    | License   |
+|---------------------------------|-----------|
+| aws/aws-crt-php                 | Apache-2.0|
+| aws/aws-sdk-php                 | Apache-2.0|
+| guzzlehttp/guzzle               | MIT       |
+| guzzlehttp/promises             | MIT       |
+| guzzlehttp/psr7                 | MIT       |
+| mtdowling/jmespath.php          | MIT       |
+| psr/http-client                 | MIT       |
+| psr/http-factory                | MIT       |
+| psr/http-message                | MIT       |
+| ralouphie/getallheaders         | MIT       |
+| symfony/deprecation-contracts   | MIT       |
+| symfony/polyfill-mbstring       | MIT       |
