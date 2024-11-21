@@ -62,7 +62,7 @@ class Rebel
             } else {
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -82,7 +82,7 @@ class Rebel
             unlink("$exportDir/test.txt");
             unlink("$exportDir/test.txt.gz");
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -126,7 +126,7 @@ class Rebel
             } else {
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -140,7 +140,7 @@ class Rebel
         try {
             $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo "An error occurred: " . $e->getMessage();
             return false;
         }
