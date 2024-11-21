@@ -16,7 +16,7 @@ This plugin is developed by Digitalist Open Cloud.
 
 ## Support
 
-Please contact <rebelmetrics@digitalist.com>.
+Please contact <cloud@digitalist.com>.
 
 ## Included packages
 
