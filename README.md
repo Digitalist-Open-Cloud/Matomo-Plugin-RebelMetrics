@@ -4,7 +4,8 @@
 
 Plugin for exporting to Matomo data to RebelMetrics. You need a
 subscription to RebelMetrics to have use for this plugin. Without the
-subscription, the plugin does nothing.
+subscription, the plugin does nothing. Contact Digitalist Open Cloud
+<cloud@digitalist.com> to get a subscription.
 
 ## What is RebelMetrics
 
@@ -20,7 +21,7 @@ Please contact <cloud@digitalist.com>.
 
 ## Included packages
 
-These packages, excluded Matomo core and plugins, are used by this plugin.
+These packages are included in the distribution of this plugin.
 
 | Package Name                    | License   |
 |---------------------------------|-----------|
@@ -36,3 +37,11 @@ These packages, excluded Matomo core and plugins, are used by this plugin.
 | ralouphie/getallheaders         | MIT       |
 | symfony/deprecation-contracts   | MIT       |
 | symfony/polyfill-mbstring       | MIT       |
+
+## License
+
+Copyright (C) 2024 Digitalist Open Cloud <cloud@digitalist.com>
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
