@@ -20,7 +20,7 @@ Please contact <rebelmetrics@digitalist.com>.
 
 ## Included packages
 
-These packages is used by this plugin.
+These packages, excluded Matomo core and plugins, are used by this plugin.
 
 | Package Name                    | License   |
 |---------------------------------|-----------|
