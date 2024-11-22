@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\RegionalEndpoint;
 
 use Aws\AbstractConfigurationProvider;
@@ -42,7 +41,8 @@ use GuzzleHttp\Promise;
  * $config = $promise->wait();
  * </code>
  */
-class ConfigurationProvider extends AbstractConfigurationProvider implements ConfigurationProviderInterface
+class ConfigurationProvider extends AbstractConfigurationProvider
+    implements ConfigurationProviderInterface
 {
     const ENV_ENDPOINTS_TYPE = 'AWS_S3_US_EAST_1_REGIONAL_ENDPOINT';
     const INI_ENDPOINTS_TYPE = 's3_us_east_1_regional_endpoint';
@@ -83,8 +83,7 @@ class ConfigurationProvider extends AbstractConfigurationProvider implements Con
             call_user_func_array([ConfigurationProvider::class, 'chain'], $configProviders)
         );
 
-        if (
-            isset($config['s3_us_east_1_regional_endpoint'])
+        if (isset($config['s3_us_east_1_regional_endpoint'])
             && $config['s3_us_east_1_regional_endpoint'] instanceof CacheInterface
         ) {
             return self::cache($memo, $config['s3_us_east_1_regional_endpoint'], self::$cacheKey);

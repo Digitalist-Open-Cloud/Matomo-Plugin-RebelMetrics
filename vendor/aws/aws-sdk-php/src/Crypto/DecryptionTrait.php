@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use GuzzleHttp\Psr7;
@@ -148,9 +147,9 @@ trait DecryptionTrait
         switch ($cipherOptions['Cipher']) {
             case 'gcm':
                 $cipherOptions['Tag'] = $this->getTagFromCiphertextStream(
-                    $cipherTextStream,
-                    $cipherOptions['TagLength']
-                );
+                        $cipherTextStream,
+                        $cipherOptions['TagLength']
+                    );
 
                 return new AesGcmDecryptingStream(
                     $this->getStrippedCiphertextStream(

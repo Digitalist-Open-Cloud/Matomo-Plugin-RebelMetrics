@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\CommandInterface;
@@ -39,8 +38,7 @@ class SSECMiddleware
         ?RequestInterface $request = null
     ) {
         // Allows only HTTPS connections when using SSE-C
-        if (
-            ($command['SSECustomerKey'] || $command['CopySourceSSECustomerKey'])
+        if (($command['SSECustomerKey'] || $command['CopySourceSSECustomerKey'])
             && $this->endpointScheme !== 'https'
         ) {
             throw new \RuntimeException('You must configure your S3 client to '

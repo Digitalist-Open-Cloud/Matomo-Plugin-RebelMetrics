@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\CommandInterface;
@@ -46,8 +45,8 @@ class ExpiresParsingMiddleware
                     trigger_error(
                         "Failed to parse the `expires` header as a timestamp due to "
                         . " an invalid timestamp format.\nPlease refer to `ExpiresString` "
-                        . "for the unparsed string format of this header.\n",
-                        E_USER_WARNING
+                        . "for the unparsed string format of this header.\n"
+                        , E_USER_WARNING
                     );
                 }
                 return $result;

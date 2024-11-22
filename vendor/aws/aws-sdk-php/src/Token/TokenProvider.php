@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Token;
 
 use Aws;
@@ -30,7 +29,6 @@ use GuzzleHttp\Promise;
 class TokenProvider
 {
     use ParsesIniTrait;
-
     const ENV_PROFILE = 'AWS_PROFILE';
 
     /**
@@ -65,8 +63,7 @@ class TokenProvider
             );
         }
 
-        if (
-            isset($config['token'])
+        if (isset($config['token'])
             && $config['token'] instanceof CacheInterface
         ) {
             foreach ($cacheable as $provider) {
@@ -170,7 +167,7 @@ class TokenProvider
                     }
                     return $result = $provider();
                 })
-                ->otherwise(function ($reason) use (&$result) {
+                ->otherwise(function($reason) use (&$result) {
                     // Cleanup rejected promise.
                     $result = null;
                     return Promise\Create::promiseFor(null);
@@ -230,8 +227,7 @@ class TokenProvider
     /**
      * Gets profiles from the ~/.aws/config ini file
      */
-    private static function loadDefaultProfiles()
-    {
+    private static function loadDefaultProfiles() {
         $profiles = [];
         $configFile = self::getHomeDir() . '/.aws/config';
 
@@ -271,3 +267,4 @@ class TokenProvider
         return new SsoTokenProvider($profileName, $filename, $ssoClient);
     }
 }
+

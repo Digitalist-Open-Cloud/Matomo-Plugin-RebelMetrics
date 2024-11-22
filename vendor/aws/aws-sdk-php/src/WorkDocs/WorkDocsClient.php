@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\WorkDocs;
 
 use Aws\AwsClient;
@@ -95,6 +94,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateUser(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateUserAsync(array $args = [])
  */
-class WorkDocsClient extends AwsClient
-{
-}
+class WorkDocsClient extends AwsClient {}

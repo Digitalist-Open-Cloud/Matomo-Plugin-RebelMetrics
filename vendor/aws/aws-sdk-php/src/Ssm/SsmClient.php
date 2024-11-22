@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Ssm;
 
 use Aws\AwsClient;
@@ -147,6 +146,8 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise getDeployablePatchSnapshotForInstanceAsync(array $args = [])
  * @method \Aws\Result getDocument(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getDocumentAsync(array $args = [])
+ * @method \Aws\Result getExecutionPreview(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise getExecutionPreviewAsync(array $args = [])
  * @method \Aws\Result getInventory(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getInventoryAsync(array $args = [])
  * @method \Aws\Result getInventorySchema(array $args = [])
@@ -205,6 +206,10 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise listDocumentsAsync(array $args = [])
  * @method \Aws\Result listInventoryEntries(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listInventoryEntriesAsync(array $args = [])
+ * @method \Aws\Result listNodes(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise listNodesAsync(array $args = [])
+ * @method \Aws\Result listNodesSummary(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise listNodesSummaryAsync(array $args = [])
  * @method \Aws\Result listOpsItemEvents(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listOpsItemEventsAsync(array $args = [])
  * @method \Aws\Result listOpsItemRelatedItems(array $args = [])
@@ -251,6 +256,8 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise startAutomationExecutionAsync(array $args = [])
  * @method \Aws\Result startChangeRequestExecution(array $args = [])
  * @method \GuzzleHttp\Promise\Promise startChangeRequestExecutionAsync(array $args = [])
+ * @method \Aws\Result startExecutionPreview(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise startExecutionPreviewAsync(array $args = [])
  * @method \Aws\Result startSession(array $args = [])
  * @method \GuzzleHttp\Promise\Promise startSessionAsync(array $args = [])
  * @method \Aws\Result stopAutomationExecution(array $args = [])
@@ -288,6 +295,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateServiceSetting(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateServiceSettingAsync(array $args = [])
  */
-class SsmClient extends AwsClient
-{
-}
+class SsmClient extends AwsClient {}

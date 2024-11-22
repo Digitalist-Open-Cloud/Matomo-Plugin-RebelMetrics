@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\SageMakerRuntime;
 
 use Aws\AwsClient;
@@ -13,6 +12,4 @@ use Aws\AwsClient;
  * @method \Aws\Result invokeEndpointWithResponseStream(array $args = [])
  * @method \GuzzleHttp\Promise\Promise invokeEndpointWithResponseStreamAsync(array $args = [])
  */
-class SageMakerRuntimeClient extends AwsClient
-{
-}
+class SageMakerRuntimeClient extends AwsClient {}

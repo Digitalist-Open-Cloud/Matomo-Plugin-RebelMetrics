@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\Crypto;
 
 use Aws\Crypto\AbstractCryptoClientV2;
@@ -25,7 +24,7 @@ class S3EncryptionMultipartUploaderV2 extends MultipartUploader
     use EncryptionTraitV2;
     use UserAgentTrait;
 
-    const CRYPTO_VERSION = '2.1';
+    CONST CRYPTO_VERSION = '2.1';
 
     /**
      * Returns if the passed cipher name is supported for encryption by the SDK.
@@ -151,7 +150,7 @@ class S3EncryptionMultipartUploaderV2 extends MultipartUploader
 
     private function getEncryptingDataPreparer()
     {
-        return function () {
+        return function() {
             // Defer encryption work until promise is executed
             $envelope = new MetadataEnvelope();
 

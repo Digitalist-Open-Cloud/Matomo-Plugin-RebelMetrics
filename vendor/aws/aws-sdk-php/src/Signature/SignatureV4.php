@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Signature;
 
 use Aws\Credentials\CredentialsInterface;
@@ -23,7 +22,6 @@ use Psr\Http\Message\RequestInterface;
 class SignatureV4 implements SignatureInterface
 {
     use SignatureTrait;
-
     const ISO8601_BASIC = 'Ymd\THis\Z';
     const UNSIGNED_PAYLOAD = 'UNSIGNED-PAYLOAD';
     const AMZ_CONTENT_SHA256_HEADER = 'X-Amz-Content-Sha256';
@@ -151,8 +149,7 @@ class SignatureV4 implements SignatureInterface
         $blacklist = $this->getHeaderBlacklist();
         foreach ($headers as $name => $value) {
             $lName = strtolower($name);
-            if (
-                !isset($blacklist[$lName])
+            if (!isset($blacklist[$lName])
                 && $name !== self::AMZ_CONTENT_SHA256_HEADER
             ) {
                 $presignHeaders[] = $lName;
@@ -369,8 +366,7 @@ class SignatureV4 implements SignatureInterface
         if ($dateValue instanceof \DateTimeInterface) {
             $timestamp = $dateValue->getTimestamp();
         } elseif (!is_numeric($dateValue)) {
-            $timestamp = strtotime(
-                $dateValue,
+            $timestamp = strtotime($dateValue,
                 $relativeTimeBase === null ? time() : $relativeTimeBase
             );
         } else {
@@ -405,8 +401,7 @@ class SignatureV4 implements SignatureInterface
                 $parsedRequest['query'][$name] = $header;
             }
             $blacklist = $this->getHeaderBlacklist();
-            if (
-                isset($blacklist[$lname])
+            if (isset($blacklist[$lname])
                 || $lname === strtolower(self::AMZ_CONTENT_SHA256_HEADER)
             ) {
                 unset($parsedRequest['headers'][$name]);
@@ -483,7 +478,7 @@ class SignatureV4 implements SignatureInterface
         $storedHeaders = [];
 
         foreach ($illegalV4aHeaders as $header) {
-            if ($request->hasHeader($header)) {
+            if ($request->hasHeader($header)){
                 $storedHeaders[$header] = $request->getHeader($header);
                 $request = $request->withoutHeader($header);
             }
@@ -498,9 +493,7 @@ class SignatureV4 implements SignatureInterface
             $request->getMethod(),
             (string) $request->getUri(),
             [], //leave empty as the query is parsed from the uri object
-            array_map(function ($header) {
-                return $header[0];
-            }, $request->getHeaders())
+            array_map(function ($header) {return $header[0];}, $request->getHeaders())
         );
     }
 
@@ -516,7 +509,7 @@ class SignatureV4 implements SignatureInterface
         RequestInterface $request,
         $signingService,
         ?SigningConfigAWS $signingConfig = null
-    ) {
+    ){
         $this->verifyCRTLoaded();
         $signingConfig = $signingConfig ?? new SigningConfigAWS([
             'algorithm' => SigningAlgorithm::SIGv4_ASYMMETRIC,
@@ -535,11 +528,9 @@ class SignatureV4 implements SignatureInterface
 
         Signing::signRequestAws(
             Signable::fromHttpRequest($http_request),
-            $signingConfig,
-            function ($signing_result, $error_code) use (&$http_request) {
-                $signing_result->applyToHttpRequest($http_request);
-            }
-        );
+            $signingConfig, function ($signing_result, $error_code) use (&$http_request) {
+            $signing_result->applyToHttpRequest($http_request);
+        });
         foreach ($removedIllegalHeaders as $header => $value) {
             $request = $request->withHeader($header, $value);
         }
@@ -556,7 +547,8 @@ class SignatureV4 implements SignatureInterface
         RequestInterface $request,
         CredentialsInterface $credentials,
         $expires
-    ) {
+    )
+    {
         $this->verifyCRTLoaded();
         $credentials_provider = $this->createCRTStaticCredentialsProvider($credentials);
         $signingConfig = new SigningConfigAWS([
@@ -580,11 +572,9 @@ class SignatureV4 implements SignatureInterface
         $http_request = $this->CRTRequestFromGuzzleRequest($request);
         Signing::signRequestAws(
             Signable::fromHttpRequest($http_request),
-            $signingConfig,
-            function ($signing_result, $error_code) use (&$http_request) {
-                $signing_result->applyToHttpRequest($http_request);
-            }
-        );
+            $signingConfig, function ($signing_result, $error_code) use (&$http_request) {
+            $signing_result->applyToHttpRequest($http_request);
+        });
 
         return $request->withUri(
             new Psr7\Uri($http_request->pathAndQuery())

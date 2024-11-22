@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Auth;
 
 use Aws\Api\Service;
@@ -38,7 +37,8 @@ class AuthSelectionMiddleware
     public static function wrap(
         AuthSchemeResolverInterface $authResolver,
         Service $api
-    ): Closure {
+    ): Closure
+    {
         return function (callable $handler) use ($authResolver, $api) {
             return new self($handler, $authResolver, $api);
         };
@@ -54,7 +54,8 @@ class AuthSelectionMiddleware
         callable $nextHandler,
         AuthSchemeResolverInterface $authResolver,
         Service $api
-    ) {
+    )
+    {
         $this->nextHandler = $nextHandler;
         $this->authResolver = $authResolver;
         $this->api = $api;
@@ -75,10 +76,9 @@ class AuthSelectionMiddleware
         $resolvableAuth = $operationAuth ?: $serviceAuth;
 
         if (!empty($resolvableAuth)) {
-            if (
-                isset($command['@context']['auth_scheme_resolver'])
+            if (isset($command['@context']['auth_scheme_resolver'])
                 && $command['@context']['auth_scheme_resolver'] instanceof AuthSchemeResolverInterface
-            ) {
+            ){
                 $resolver = $command['@context']['auth_scheme_resolver'];
             } else {
                 $resolver = $this->authResolver;

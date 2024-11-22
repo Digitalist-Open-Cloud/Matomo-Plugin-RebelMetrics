@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\SecretsManager;
 
 use Aws\AwsClient;
@@ -53,6 +52,4 @@ use Aws\AwsClient;
  * @method \Aws\Result validateResourcePolicy(array $args = [])
  * @method \GuzzleHttp\Promise\Promise validateResourcePolicyAsync(array $args = [])
  */
-class SecretsManagerClient extends AwsClient
-{
-}
+class SecretsManagerClient extends AwsClient {}

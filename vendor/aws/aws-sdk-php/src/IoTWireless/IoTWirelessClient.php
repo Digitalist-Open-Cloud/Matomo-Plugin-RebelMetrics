@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\IoTWireless;
 
 use Aws\AwsClient;
@@ -231,6 +230,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateWirelessGateway(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateWirelessGatewayAsync(array $args = [])
  */
-class IoTWirelessClient extends AwsClient
-{
-}
+class IoTWirelessClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Credentials\CredentialsInterface;
@@ -129,8 +128,7 @@ class PostObject
     {
         $uri = new Uri($this->client->getEndpoint());
 
-        if (
-            $this->client->getConfig('use_path_style_endpoint') === true
+        if ($this->client->getConfig('use_path_style_endpoint') === true
             || ($uri->getScheme() === 'https'
             && strpos($this->bucket, '.') !== false)
         ) {

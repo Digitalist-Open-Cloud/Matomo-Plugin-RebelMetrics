@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MailManager;
 
 use Aws\AwsClient;
@@ -101,6 +100,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateTrafficPolicy(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateTrafficPolicyAsync(array $args = [])
  */
-class MailManagerClient extends AwsClient
-{
-}
+class MailManagerClient extends AwsClient {}

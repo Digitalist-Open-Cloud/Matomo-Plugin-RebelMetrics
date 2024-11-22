@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Personalize;
 
 use Aws\AwsClient;
@@ -149,6 +148,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateSolution(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateSolutionAsync(array $args = [])
  */
-class PersonalizeClient extends AwsClient
-{
-}
+class PersonalizeClient extends AwsClient {}

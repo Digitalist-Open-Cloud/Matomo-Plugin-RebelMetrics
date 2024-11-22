@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\NeptuneGraph;
 
 use Aws\AwsClient;
@@ -63,6 +62,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateGraph(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateGraphAsync(array $args = [])
  */
-class NeptuneGraphClient extends AwsClient
-{
-}
+class NeptuneGraphClient extends AwsClient {}

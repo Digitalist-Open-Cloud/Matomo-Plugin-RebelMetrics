@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Neptunedata;
 
 use Aws\AwsClient;
@@ -93,6 +92,4 @@ use Aws\AwsClient;
  * @method \Aws\Result startMLModelTransformJob(array $args = [])
  * @method \GuzzleHttp\Promise\Promise startMLModelTransformJobAsync(array $args = [])
  */
-class NeptunedataClient extends AwsClient
-{
-}
+class NeptunedataClient extends AwsClient {}

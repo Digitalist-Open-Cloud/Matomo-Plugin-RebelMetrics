@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Token;
 
 use Aws\Identity\BearerTokenIdentity;

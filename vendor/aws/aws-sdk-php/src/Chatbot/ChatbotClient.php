@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Chatbot;
 
 use Aws\AwsClient;
@@ -59,6 +58,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateSlackChannelConfiguration(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateSlackChannelConfigurationAsync(array $args = [])
  */
-class ChatbotClient extends AwsClient
-{
-}
+class ChatbotClient extends AwsClient {}

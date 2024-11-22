@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\OSIS\Exception;
 
 use Aws\Exception\AwsException;
@@ -7,6 +6,4 @@ use Aws\Exception\AwsException;
 /**
  * Represents an error interacting with the **Amazon OpenSearch Ingestion** service.
  */
-class OSISException extends AwsException
-{
-}
+class OSISException extends AwsException {}

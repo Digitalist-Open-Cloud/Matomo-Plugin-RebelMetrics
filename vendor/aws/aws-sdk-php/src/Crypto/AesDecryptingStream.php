@@ -1,9 +1,8 @@
 <?php
-
 namespace Aws\Crypto;
 
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
-use LogicException;
+use \LogicException;
 use Psr\Http\Message\StreamInterface;
 use Aws\Crypto\Cipher\CipherMethod;
 
@@ -126,8 +125,7 @@ class AesDecryptingStream implements AesStreamInterface
         } while (strlen($cipherText) < $length && !$this->stream->eof());
 
         $options = OPENSSL_RAW_DATA;
-        if (
-            !$this->stream->eof()
+        if (!$this->stream->eof()
             && $this->stream->getSize() !== $this->stream->tell()
         ) {
             $options |= OPENSSL_ZERO_PADDING;

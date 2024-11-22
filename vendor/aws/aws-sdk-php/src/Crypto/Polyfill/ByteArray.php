@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto\Polyfill;
 
 /**
@@ -40,7 +39,7 @@ class ByteArray extends \SplFixedArray
                     if (strlen($t) < 1) {
                         continue;
                     }
-                    $arr [] = \unpack('C', $t)[1] & 0xff;
+                    $arr []= \unpack('C', $t)[1] & 0xff;
                 }
             }
             $size = \count($arr);
@@ -180,7 +179,7 @@ class ByteArray extends \SplFixedArray
         $rightLength = $right->count();
         $out = clone $right;
         $mask = (-($select & 1)) & 0xff;
-        for ($i = 0; $i < $rightLength; $i++) {
+        for ($i = 0; $i < $rightLength;  $i++) {
             $out[$i] = $out[$i] ^ (($left[$i] ^ $right[$i]) & $mask);
         }
         return $out;
@@ -207,8 +206,7 @@ class ByteArray extends \SplFixedArray
             $length = $input->count();
         }
 
-        $i = 0;
-        $j = $offset;
+        $i = 0; $j = $offset;
         while ($i < $length && $j < $this->count()) {
             $this[$j] = $input[$i];
             ++$i;

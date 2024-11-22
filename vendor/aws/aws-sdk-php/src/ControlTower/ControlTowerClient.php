@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\ControlTower;
 
 use Aws\AwsClient;
@@ -63,6 +62,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateLandingZone(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateLandingZoneAsync(array $args = [])
  */
-class ControlTowerClient extends AwsClient
-{
-}
+class ControlTowerClient extends AwsClient {}

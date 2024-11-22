@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\ConnectCampaignService;
 
 use Aws\AwsClient;
@@ -51,6 +50,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateCampaignOutboundCallConfig(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateCampaignOutboundCallConfigAsync(array $args = [])
  */
-class ConnectCampaignServiceClient extends AwsClient
-{
-}
+class ConnectCampaignServiceClient extends AwsClient {}

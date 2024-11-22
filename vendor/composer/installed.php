@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3407a52d1e1d283c8f5e08ff455a70028ac90fa8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3407a52d1e1d283c8f5e08ff455a70028ac90fa8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.328.1',
-            'version' => '3.328.1.0',
-            'reference' => '52d8219935146c3261181de2da4d36bf04c76298',
+            'pretty_version' => '3.329.0',
+            'version' => '3.329.0.0',
+            'reference' => '37249799204e04cf3686d2b361cfd417d3dab123',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
@@ -128,9 +128,9 @@
             'dev_requirement' => false,
         ),
         'symfony/deprecation-contracts' => array(
-            'pretty_version' => 'v3.5.0',
-            'version' => '3.5.0.0',
-            'reference' => '0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1',
+            'pretty_version' => 'v2.5.3',
+            'version' => '2.5.3.0',
+            'reference' => '80d075412b557d41002320b96a096ca65aa2c98d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),

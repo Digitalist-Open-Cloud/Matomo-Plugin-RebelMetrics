@@ -22,7 +22,8 @@ final class GetBucketLocationResultMutator implements S3ResultMutator
         ResultInterface $result,
         CommandInterface $command,
         ResponseInterface $response
-    ): ResultInterface {
+    ): ResultInterface
+    {
         if ($command->getName() !== 'GetBucketLocation') {
             return $result;
         }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MarketplaceAgreement;
 
 use Aws\AwsClient;
@@ -13,6 +12,4 @@ use Aws\AwsClient;
  * @method \Aws\Result searchAgreements(array $args = [])
  * @method \GuzzleHttp\Promise\Promise searchAgreementsAsync(array $args = [])
  */
-class MarketplaceAgreementClient extends AwsClient
-{
-}
+class MarketplaceAgreementClient extends AwsClient {}

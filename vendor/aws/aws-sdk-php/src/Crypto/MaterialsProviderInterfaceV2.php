@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 interface MaterialsProviderInterfaceV2

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PrivateNetworks;
 
 use Aws\AwsClient;
@@ -59,6 +58,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateNetworkSitePlan(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateNetworkSitePlanAsync(array $args = [])
  */
-class PrivateNetworksClient extends AwsClient
-{
-}
+class PrivateNetworksClient extends AwsClient {}

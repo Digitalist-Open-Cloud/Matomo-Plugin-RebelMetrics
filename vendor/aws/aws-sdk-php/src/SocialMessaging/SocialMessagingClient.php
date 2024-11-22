@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\SocialMessaging;
 
 use Aws\AwsClient;
@@ -33,6 +32,4 @@ use Aws\AwsClient;
  * @method \Aws\Result untagResource(array $args = [])
  * @method \GuzzleHttp\Promise\Promise untagResourceAsync(array $args = [])
  */
-class SocialMessagingClient extends AwsClient
-{
-}
+class SocialMessagingClient extends AwsClient {}

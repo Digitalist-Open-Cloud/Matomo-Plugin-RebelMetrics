@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\OAM;
 
 use Aws\AwsClient;
@@ -37,6 +36,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateLink(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateLinkAsync(array $args = [])
  */
-class OAMClient extends AwsClient
-{
-}
+class OAMClient extends AwsClient {}

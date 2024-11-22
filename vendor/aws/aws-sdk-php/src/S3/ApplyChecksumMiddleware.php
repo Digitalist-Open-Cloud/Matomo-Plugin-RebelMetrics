@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Api\Service;
@@ -19,7 +18,6 @@ use Psr\Http\Message\StreamInterface;
 class ApplyChecksumMiddleware
 {
     use CalculatesChecksumTrait;
-
     private static $sha256AndMd5 = [
         'PutObject',
         'UploadPart',
@@ -73,8 +71,7 @@ class ApplyChecksumMiddleware
             $supportedAlgorithms = isset($checksumMember['enum'])
                 ? array_map('strtolower', $checksumMember['enum'])
                 : null;
-            if (
-                is_array($supportedAlgorithms)
+            if (is_array($supportedAlgorithms)
                 && in_array($requestedAlgorithm, $supportedAlgorithms)
             ) {
                 $request = $this->addAlgorithmHeader($requestedAlgorithm, $request, $body);
@@ -90,9 +87,8 @@ class ApplyChecksumMiddleware
 
         if (!empty($checksumInfo)) {
         //if the checksum member is absent, check if it's required
-            $checksumRequired = $checksumInfo['requestChecksumRequired'] ?? null;
-            if (
-                (!empty($checksumRequired))
+        $checksumRequired = $checksumInfo['requestChecksumRequired'] ?? null;
+            if ((!empty($checksumRequired))
                 || (in_array($name, self::$sha256AndMd5) && $addContentMD5)
             ) {
                 //S3Express doesn't support MD5; default to crc32 instead

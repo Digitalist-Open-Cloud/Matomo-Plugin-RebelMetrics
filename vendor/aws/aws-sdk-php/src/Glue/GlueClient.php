@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Glue;
 
 use Aws\AwsClient;
@@ -469,6 +468,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateWorkflow(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateWorkflowAsync(array $args = [])
  */
-class GlueClient extends AwsClient
-{
-}
+class GlueClient extends AwsClient {}

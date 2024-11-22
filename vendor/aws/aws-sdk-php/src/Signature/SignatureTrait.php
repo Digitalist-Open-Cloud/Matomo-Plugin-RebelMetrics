@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Signature;
 
 /**
@@ -12,7 +11,7 @@ trait SignatureTrait
 
     /** @var int Size of the hash cache */
     private $cacheSize = 0;
-
+    
     private function createScope($shortDate, $region, $service)
     {
         return "$shortDate/$region/$service/aws4_request";

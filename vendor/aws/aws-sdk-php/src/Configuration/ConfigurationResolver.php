@@ -30,7 +30,8 @@ class ConfigurationResolver
         $defaultValue,
         $expectedType,
         $config = []
-    ) {
+    )
+    {
         $iniOptions = isset($config['ini_resolver_options'])
             ? $config['ini_resolver_options']
             : [];
@@ -40,8 +41,7 @@ class ConfigurationResolver
             return $envValue;
         }
 
-        if (
-            !isset($config['use_aws_shared_config_files'])
+        if (!isset($config['use_aws_shared_config_files'])
             || $config['use_aws_shared_config_files'] != false
         ) {
             $iniValue = self::ini(
@@ -51,7 +51,7 @@ class ConfigurationResolver
                 null,
                 $iniOptions
             );
-            if (!is_null($iniValue)) {
+            if(!is_null($iniValue)) {
                 return $iniValue;
             }
         }
@@ -104,7 +104,7 @@ class ConfigurationResolver
         $profile = null,
         $filename = null,
         $options = []
-    ) {
+    ){
         $filename = $filename ?: (self::getDefaultConfigFilename());
         $profile = $profile ?: (getenv(self::ENV_PROFILE) ?: 'default');
 
@@ -115,11 +115,10 @@ class ConfigurationResolver
         //TODO change after deprecation
         $data = @\Aws\parse_ini_file($filename, true, INI_SCANNER_NORMAL);
 
-        if (
-            isset($options['section'])
+        if (isset($options['section'])
             && isset($options['subsection'])
-            && isset($options['key'])
-        ) {
+            && isset($options['key']))
+        {
             return self::retrieveValueFromIniSubsection(
                 $data,
                 $profile,
@@ -129,8 +128,7 @@ class ConfigurationResolver
             );
         }
 
-        if (
-            $data === false
+        if ($data === false
             || !isset($data[$profile])
             || !isset($data[$profile][$key])
         ) {
@@ -194,15 +192,13 @@ class ConfigurationResolver
      */
     private static function convertType($value, $type)
     {
-        if (
-            $type === 'bool'
+        if ($type === 'bool'
             && !is_null($convertedValue = \Aws\boolean_value($value))
         ) {
             return $convertedValue;
         }
 
-        if (
-            $type === 'int'
+        if ($type === 'int'
             && filter_var($value, FILTER_VALIDATE_INT)
         ) {
             $value = intVal($value);
@@ -227,10 +223,9 @@ class ConfigurationResolver
         $filename,
         $expectedType,
         $options
-    ) {
+    ){
         $section = $options['section'];
-        if (
-            $data === false
+        if ($data === false
             || !isset($data[$profile][$section])
             || !isset($data["{$section} {$data[$profile][$section]}"])
         ) {
@@ -242,8 +237,7 @@ class ConfigurationResolver
             "services {$data[$profile]['services']}"
         );
 
-        if (
-            !isset($services_section[$options['subsection']][$options['key']])
+        if (!isset($services_section[$options['subsection']][$options['key']])
         ) {
             return null;
         }

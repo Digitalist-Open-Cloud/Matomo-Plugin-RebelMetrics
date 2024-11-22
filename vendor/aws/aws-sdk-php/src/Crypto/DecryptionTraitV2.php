@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use Aws\Exception\CryptoException;
@@ -161,17 +160,13 @@ trait DecryptionTraitV2
                 . " This profile allows decryption with: "
                 . implode(", ", $allowedCiphers));
         }
-        if (
-            !in_array(
+        if (!in_array(
+            $envelope[MetadataEnvelope::KEY_WRAP_ALGORITHM_HEADER],
+            $allowedKeywraps
+        )) {
+            if (in_array(
                 $envelope[MetadataEnvelope::KEY_WRAP_ALGORITHM_HEADER],
-                $allowedKeywraps
-            )
-        ) {
-            if (
-                in_array(
-                    $envelope[MetadataEnvelope::KEY_WRAP_ALGORITHM_HEADER],
-                    AbstractCryptoClient::$supportedKeyWraps
-                )
+                AbstractCryptoClient::$supportedKeyWraps)
             ) {
                 throw $v1SchemaException;
             }
@@ -185,8 +180,7 @@ trait DecryptionTraitV2
             $envelope[MetadataEnvelope::MATERIALS_DESCRIPTION_HEADER],
             true
         );
-        if (
-            isset($matdesc['aws:x-amz-cek-alg'])
+        if (isset($matdesc['aws:x-amz-cek-alg'])
             && $envelope[MetadataEnvelope::CONTENT_CRYPTO_SCHEME_HEADER] !==
                 $matdesc['aws:x-amz-cek-alg']
         ) {
@@ -221,9 +215,9 @@ trait DecryptionTraitV2
         switch ($cipherOptions['Cipher']) {
             case 'gcm':
                 $cipherOptions['Tag'] = $this->getTagFromCiphertextStream(
-                    $cipherTextStream,
-                    $cipherOptions['TagLength']
-                );
+                        $cipherTextStream,
+                        $cipherOptions['TagLength']
+                    );
 
                 return new AesGcmDecryptingStream(
                     $this->getStrippedCiphertextStream(

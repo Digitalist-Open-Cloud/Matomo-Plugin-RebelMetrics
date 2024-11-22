@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Api\Parser\PayloadParserTrait;
@@ -292,7 +291,7 @@ trait S3ClientTrait
             ) {
                 return true;
             }
-            if ($e->getStatusCode() === 404) {
+            if ($e->getStatusCode() === 404)  {
                 return false;
             }
             throw $e;
@@ -320,18 +319,18 @@ trait S3ClientTrait
         $key,
         $includeDeleteMarkers = false,
         array $options = []
-    ) {
+    ){
         $command = $this->getCommand('HeadObject', [
                 'Bucket' => $bucket,
                 'Key'    => $key
-            ] + $options);
+            ] + $options
+        );
 
         try {
             $this->execute($command);
             return true;
         } catch (S3Exception $e) {
-            if (
-                $includeDeleteMarkers
+            if ($includeDeleteMarkers
                 && $this->useDeleteMarkers($e)
             ) {
                 return true;

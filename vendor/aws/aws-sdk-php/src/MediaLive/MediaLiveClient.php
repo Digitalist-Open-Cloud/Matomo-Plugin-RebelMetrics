@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MediaLive;
 
 use Aws\AwsClient;
@@ -235,6 +234,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateNodeState(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateNodeStateAsync(array $args = [])
  */
-class MediaLiveClient extends AwsClient
-{
-}
+class MediaLiveClient extends AwsClient {}

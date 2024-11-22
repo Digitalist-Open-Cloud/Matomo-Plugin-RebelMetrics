@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use Aws\Exception\CryptoException;
@@ -74,8 +73,7 @@ class KmsMaterialsProviderV2 extends MaterialsProviderV2 implements MaterialsPro
                 . ' instantiated with a KMS key id.');
         }
         $options = array_change_key_case($options);
-        if (
-            !isset($options['@kmsencryptioncontext'])
+        if (!isset($options['@kmsencryptioncontext'])
             || !is_array($options['@kmsencryptioncontext'])
         ) {
             throw new CryptoException("'@KmsEncryptionContext' is a"

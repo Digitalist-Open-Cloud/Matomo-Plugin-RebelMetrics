@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws;
 
 use Aws\Api\Service;
@@ -11,6 +10,7 @@ use Aws\Api\Service;
  */
 class InputValidationMiddleware
 {
+
     /** @var callable */
     private $nextHandler;
 
@@ -26,10 +26,8 @@ class InputValidationMiddleware
      * @param Service $service
      * @param array $mandatoryAttributeList
      * @return callable     */
-    public static function wrap(Service $service, $mandatoryAttributeList)
-    {
-        if (
-            !is_array($mandatoryAttributeList) ||
+    public static function wrap(Service $service, $mandatoryAttributeList) {
+        if (!is_array($mandatoryAttributeList) ||
             array_filter($mandatoryAttributeList, 'is_string') !== $mandatoryAttributeList
         ) {
             throw new \InvalidArgumentException(
@@ -51,8 +49,7 @@ class InputValidationMiddleware
         $this->mandatoryAttributeList = $mandatoryAttributeList;
     }
 
-    public function __invoke(CommandInterface $cmd)
-    {
+    public function __invoke(CommandInterface $cmd) {
         $nextHandler = $this->nextHandler;
         $op = $this->service->getOperation($cmd->getName())->toArray();
         if (!empty($op['input']['shape'])) {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\ARCZonalShift;
 
 use Aws\AwsClient;
@@ -33,6 +32,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateZonalShift(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateZonalShiftAsync(array $args = [])
  */
-class ARCZonalShiftClient extends AwsClient
-{
-}
+class ARCZonalShiftClient extends AwsClient {}

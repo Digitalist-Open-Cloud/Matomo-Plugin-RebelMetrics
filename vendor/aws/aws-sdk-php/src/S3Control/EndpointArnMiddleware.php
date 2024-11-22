@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3Control;
 
 use Aws\Api\Service;
@@ -73,10 +72,11 @@ class EndpointArnMiddleware
      */
     public static function wrap(
         Service $service,
-        $region,
-        array $config,
-        $isUseEndpointV2
-    ) {
+                $region,
+        array   $config,
+                $isUseEndpointV2
+    )
+    {
         return function (callable $handler) use ($service, $region, $config, $isUseEndpointV2) {
             return new self($handler, $service, $region, $config, $isUseEndpointV2);
         };
@@ -84,11 +84,12 @@ class EndpointArnMiddleware
 
     public function __construct(
         callable $nextHandler,
-        Service $service,
-        $region,
-        array $config = [],
+        Service  $service,
+                 $region,
+        array    $config = [],
         $isUseEndpointV2 = false
-    ) {
+    )
+    {
         $this->partitionProvider = PartitionEndpointProvider::defaultProvider();
         $this->region = $region;
         $this->service = $service;
@@ -102,12 +103,12 @@ class EndpointArnMiddleware
         $nextHandler = $this->nextHandler;
 
         $op = $this->service->getOperation($cmd->getName())->toArray();
-        if (
-            !empty($op['input']['shape'])
+        if (!empty($op['input']['shape'])
             && !in_array($cmd->getName(), self::$nonArnableCmds)
         ) {
             $service = $this->service->toArray();
             if (!empty($input = $service['shapes'][$op['input']['shape']])) {
+
                 // Stores member name that targets 'BucketName' shape
                 $bucketNameMember = null;
 
@@ -125,16 +126,14 @@ class EndpointArnMiddleware
 
                 // Determine if appropriate member contains ARN value and is
                 // eligible for ARN expansion
-                if (
-                    !is_null($bucketNameMember)
+                if (!is_null($bucketNameMember)
                     && !empty($cmd[$bucketNameMember])
                     && !in_array($cmd->getName(), self::$selectiveNonArnableCmds['BucketName'])
                     && ArnParser::isArn($cmd[$bucketNameMember])
                 ) {
                     $arn = ArnParser::parse($cmd[$bucketNameMember]);
                     !$this->isUseEndpointV2 && $partition = $this->validateBucketArn($arn);
-                } elseif (
-                    !is_null($accesspointNameMember)
+                } elseif (!is_null($accesspointNameMember)
                     && !empty($cmd[$accesspointNameMember])
                     && !in_array($cmd->getName(), self::$selectiveNonArnableCmds['AccessPointName'])
                     && ArnParser::isArn($cmd[$accesspointNameMember])
@@ -173,6 +172,7 @@ class EndpointArnMiddleware
                         // Replace ARN in the command
                         $cmd[$accesspointNameMember] = $arn->getAccesspointName();
                     } elseif ($arn instanceof BucketArnInterface) {
+
                         // Replace ARN in the path
                         $path = str_replace(
                             urlencode($cmd[$bucketNameMember]),
@@ -233,6 +233,8 @@ class EndpointArnMiddleware
                     if ($arn instanceof OutpostsArnInterface) {
                         $cmd['@context']['signing_service'] = $arn->getService();
                     }
+
+
                 }
             }
         }
@@ -242,8 +244,7 @@ class EndpointArnMiddleware
         // For operations that redirect endpoint & signing service based on
         // presence of OutpostId member. These operations will likely not
         // overlap with operations that perform ARN expansion.
-        if (
-            in_array($cmd->getName(), self::$outpostIdRedirectCmds)
+        if (in_array($cmd->getName(), self::$outpostIdRedirectCmds)
             && !empty($cmd['OutpostId'])
         ) {
             $req = $req->withUri(
@@ -312,14 +313,12 @@ class EndpointArnMiddleware
     private function validateArn(ArnInterface $arn)
     {
         // Dualstack is not supported with Outposts ARNs
-        if (
-            $arn instanceof OutpostsArnInterface
+        if ($arn instanceof OutpostsArnInterface
             && !empty($this->config['dual_stack'])
         ) {
             throw new UnresolvedEndpointException(
                 'Dualstack is currently not supported with S3 Outposts ARNs.'
-                . ' Please disable dualstack or do not supply an Outposts ARN.'
-            );
+                . ' Please disable dualstack or do not supply an Outposts ARN.');
         }
 
         // Get partitions for ARN and client region

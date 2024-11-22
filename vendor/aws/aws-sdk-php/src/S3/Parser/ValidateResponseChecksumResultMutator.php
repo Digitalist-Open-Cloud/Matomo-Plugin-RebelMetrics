@@ -17,7 +17,6 @@ use Psr\Http\Message\ResponseInterface;
 final class ValidateResponseChecksumResultMutator implements S3ResultMutator
 {
     use CalculatesChecksumTrait;
-
     /** @var Service $api */
     private $api;
 
@@ -40,13 +39,13 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
         ResultInterface $result,
         ?CommandInterface $command = null,
         ?ResponseInterface $response = null
-    ): ResultInterface {
+    ): ResultInterface
+    {
         $operation = $this->api->getOperation($command->getName());
         // Skip this middleware if the operation doesn't have an httpChecksum
         $checksumInfo = empty($operation['httpChecksum'])
             ? null
-            : $operation['httpChecksum'];
-        ;
+            : $operation['httpChecksum'];;
         if (null === $checksumInfo) {
             return $result;
         }
@@ -56,10 +55,8 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
         $checksumModeEnabledMember = $checksumInfo['requestValidationModeMember'] ?? "";
         $checksumModeEnabled = $command[$checksumModeEnabledMember] ?? "";
         $responseAlgorithms = $checksumInfo['responseAlgorithms'] ?? [];
-        if (
-            empty($responseAlgorithms)
-            || strtolower($checksumModeEnabled) !== "enabled"
-        ) {
+        if (empty($responseAlgorithms)
+            || strtolower($checksumModeEnabled) !== "enabled") {
             return $result;
         }
 
@@ -82,18 +79,15 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
         } elseif ($checksumValidationInfo['status'] == "FAILED") {
             // Ignore failed validations on GetObject if it's a multipart get
             // which returned a full multipart object
-            if (
-                $command->getName() === "GetObject"
+            if ($command->getName() === "GetObject"
                 && !empty($checksumValidationInfo['checksumHeaderValue'])
             ) {
                 $headerValue = $checksumValidationInfo['checksumHeaderValue'];
                 $lastDashPos = strrpos($headerValue, '-');
                 $endOfChecksum = substr($headerValue, $lastDashPos + 1);
-                if (
-                    is_numeric($endOfChecksum)
+                if (is_numeric($endOfChecksum)
                     && intval($endOfChecksum) > 1
-                    && intval($endOfChecksum) < 10000
-                ) {
+                    && intval($endOfChecksum) < 10000) {
                     return $result;
                 }
             }
@@ -116,7 +110,8 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
     private function validateChecksum(
         $checksumPriority,
         ResponseInterface $response
-    ): array {
+    ): array
+    {
         $checksumToValidate = $this->chooseChecksumHeaderToValidate(
             $checksumPriority,
             $response
@@ -154,7 +149,8 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
     private function chooseChecksumHeaderToValidate(
         $checksumPriority,
         ResponseInterface $response
-    ): ?string {
+    ):? string
+    {
         foreach ($checksumPriority as $checksum) {
             $checksumHeader = 'x-amz-checksum-' . $checksum;
             if ($response->hasHeader($checksumHeader)) {

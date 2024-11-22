@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\CognitoIdentity;
 
 use Aws\AwsClient;
@@ -54,6 +53,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateIdentityPool(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateIdentityPoolAsync(array $args = [])
  */
-class CognitoIdentityClient extends AwsClient
-{
-}
+class CognitoIdentityClient extends AwsClient {}

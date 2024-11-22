@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PaymentCryptographyData;
 
 use Aws\AwsClient;
@@ -31,6 +30,4 @@ use Aws\AwsClient;
  * @method \Aws\Result verifyPinData(array $args = [])
  * @method \GuzzleHttp\Promise\Promise verifyPinDataAsync(array $args = [])
  */
-class PaymentCryptographyDataClient extends AwsClient
-{
-}
+class PaymentCryptographyDataClient extends AwsClient {}

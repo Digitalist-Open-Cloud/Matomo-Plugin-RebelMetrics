@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\HashingStream;
@@ -128,8 +127,7 @@ class MultipartUploader extends AbstractUploader
         $body->seek(0);
         $data['Body'] = $body;
 
-        if (
-            isset($config['add_content_md5'])
+        if (isset($config['add_content_md5'])
             && $config['add_content_md5'] === true
         ) {
             $data['AddContentMD5'] = true;

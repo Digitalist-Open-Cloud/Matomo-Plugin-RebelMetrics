@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\CognitoIdentity;
 
 use Aws\Credentials\Credentials;

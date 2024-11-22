@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\LookoutEquipment;
 
 use Aws\AwsClient;
@@ -105,6 +104,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateRetrainingScheduler(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateRetrainingSchedulerAsync(array $args = [])
  */
-class LookoutEquipmentClient extends AwsClient
-{
-}
+class LookoutEquipmentClient extends AwsClient {}

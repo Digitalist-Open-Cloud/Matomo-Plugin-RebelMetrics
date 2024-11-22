@@ -39,7 +39,7 @@ class AuthSchemeResolver implements AuthSchemeResolverInterface
         callable $credentialProvider,
         ?callable $tokenProvider = null,
         array $authSchemeMap = []
-    ) {
+    ){
         $this->credentialProvider = $credentialProvider;
         $this->tokenProvider = $tokenProvider;
         $this->authSchemeMap = empty($authSchemeMap)
@@ -62,10 +62,11 @@ class AuthSchemeResolver implements AuthSchemeResolverInterface
     public function selectAuthScheme(
         array $authSchemes,
         array $args = []
-    ): string {
+    ): string
+    {
         $failureReasons = [];
 
-        foreach ($authSchemes as $authScheme) {
+        foreach($authSchemes as $authScheme) {
             $normalizedAuthScheme = $this->authSchemeMap[$authScheme] ?? $authScheme;
 
             if ($this->isCompatibleAuthScheme($normalizedAuthScheme)) {

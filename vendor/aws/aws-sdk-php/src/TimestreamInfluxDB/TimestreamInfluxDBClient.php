@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\TimestreamInfluxDB;
 
 use Aws\AwsClient;
@@ -29,6 +28,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateDbInstance(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateDbInstanceAsync(array $args = [])
  */
-class TimestreamInfluxDBClient extends AwsClient
-{
-}
+class TimestreamInfluxDBClient extends AwsClient {}

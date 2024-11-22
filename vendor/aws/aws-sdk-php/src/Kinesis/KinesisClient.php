@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Kinesis;
 
 use Aws\AwsClient;
@@ -70,6 +69,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateStreamMode(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateStreamModeAsync(array $args = [])
  */
-class KinesisClient extends AwsClient
-{
-}
+class KinesisClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Api\Parser\AbstractParser;
@@ -43,8 +42,7 @@ class AmbiguousSuccessParser extends AbstractParser
         CommandInterface $command,
         ResponseInterface $response
     ) {
-        if (
-            200 === $response->getStatusCode()
+        if (200 === $response->getStatusCode()
             && isset(self::$ambiguousSuccesses[$command->getName()])
         ) {
             $errorParser = $this->errorParser;

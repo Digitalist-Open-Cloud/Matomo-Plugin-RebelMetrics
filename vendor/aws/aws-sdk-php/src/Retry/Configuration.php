@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Retry;
 
 use Aws\Retry\Exception\ConfigurationException;
@@ -21,8 +20,7 @@ class Configuration implements ConfigurationInterface
             throw new ConfigurationException("'{$mode}' is not a valid mode."
                 . " The mode has to be 'legacy', 'standard', or 'adaptive'.");
         }
-        if (
-            !is_numeric($maxAttempts)
+        if (!is_numeric($maxAttempts)
             || intval($maxAttempts) != $maxAttempts
             || $maxAttempts < 1
         ) {

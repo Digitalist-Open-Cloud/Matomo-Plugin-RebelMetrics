@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use Aws\Kms\KmsClient;
@@ -46,10 +45,8 @@ class KmsMaterialsProvider extends MaterialsProvider implements MaterialsProvide
             true
         );
 
-        if (
-            empty($materialsDescription['kms_cmk_id'])
-            && empty($materialsDescription['aws:x-amz-cek-alg'])
-        ) {
+        if (empty($materialsDescription['kms_cmk_id'])
+            && empty($materialsDescription['aws:x-amz-cek-alg'])) {
             throw new \RuntimeException('Not able to detect kms_cmk_id (legacy'
                 . ' implementation) or aws:x-amz-cek-alg (current implementation)'
                 . ' from kms materials description.');

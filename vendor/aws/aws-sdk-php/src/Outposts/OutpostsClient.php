@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Outposts;
 
 use Aws\AwsClient;
@@ -73,6 +72,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateSiteRackPhysicalProperties(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateSiteRackPhysicalPropertiesAsync(array $args = [])
  */
-class OutpostsClient extends AwsClient
-{
-}
+class OutpostsClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Retry\Exception;
 
 use Aws\HasMonitoringEventsTrait;

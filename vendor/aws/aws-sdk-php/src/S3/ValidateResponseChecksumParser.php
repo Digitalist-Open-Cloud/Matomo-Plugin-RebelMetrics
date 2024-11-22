@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Api\Parser\AbstractParser;
@@ -16,7 +15,6 @@ use Psr\Http\Message\StreamInterface;
 class ValidateResponseChecksumParser extends AbstractParser
 {
     use CalculatesChecksumTrait;
-
     /**
      * @param callable $parser Parser to wrap.
      */
@@ -52,8 +50,7 @@ class ValidateResponseChecksumParser extends AbstractParser
         $responseAlgorithms = isset($checksumInfo['responseAlgorithms'])
             ? $checksumInfo['responseAlgorithms']
             : [];
-        if (
-            empty($responseAlgorithms)
+        if (empty($responseAlgorithms)
             || strtolower($checksumModeEnabled) !== "enabled"
         ) {
             return $result;
@@ -69,20 +66,17 @@ class ValidateResponseChecksumParser extends AbstractParser
 
         if ($checksumValidationInfo['status'] == "SUCCEEDED") {
             $result['ChecksumValidated'] = $checksumValidationInfo['checksum'];
-        } elseif ($checksumValidationInfo['status'] == "FAILED") {
+        } else if ($checksumValidationInfo['status'] == "FAILED"){
             //Ignore failed validations on GetObject if it's a multipart get which returned a full multipart object
-            if (
-                $command->getName() == "GetObject"
+            if ($command->getName() == "GetObject"
                 && !empty($checksumValidationInfo['checksumHeaderValue'])
             ) {
                 $headerValue = $checksumValidationInfo['checksumHeaderValue'];
                 $lastDashPos = strrpos($headerValue, '-');
                 $endOfChecksum = substr($headerValue, $lastDashPos + 1);
-                if (
-                    is_numeric($endOfChecksum)
+                if (is_numeric($endOfChecksum)
                     && intval($endOfChecksum) > 1
-                    && intval($endOfChecksum) < 10000
-                ) {
+                    && intval($endOfChecksum) < 10000) {
                     return $result;
                 }
             }

@@ -42,7 +42,8 @@ final class S3Parser extends AbstractParser
         XmlErrorParser $errorParser,
         Service $api,
         string $exceptionClass = AwsException::class
-    ) {
+    )
+    {
         parent::__construct($api);
         $this->protocolParser = $protocolParser;
         $this->errorParser = $errorParser;
@@ -61,7 +62,8 @@ final class S3Parser extends AbstractParser
     public function __invoke(
         CommandInterface $command,
         ResponseInterface $response
-    ): ?ResultInterface {
+    ):? ResultInterface
+    {
         // Check first if the response is an error
         $this->parse200Error($command, $response);
 
@@ -95,14 +97,13 @@ final class S3Parser extends AbstractParser
     private function parse200Error(
         CommandInterface $command,
         ResponseInterface $response
-    ): void {
+    ): void
+    {
         // This error parsing should be just for 200 error responses
         // and operations where its output shape does not have a streaming
         // member.
-        if (
-            200 !== $response->getStatusCode()
-            || !$this->shouldBeConsidered200Error($command->getName())
-        ) {
+        if (200 !== $response->getStatusCode()
+            || !$this->shouldBeConsidered200Error($command->getName())) {
             return;
         }
 
@@ -196,7 +197,8 @@ final class S3Parser extends AbstractParser
         ResultInterface $result,
         CommandInterface $command,
         ResponseInterface $response
-    ): ResultInterface {
+    ): ResultInterface
+    {
         foreach ($this->s3ResultMutators as $mutator) {
             $result = $mutator($result, $command, $response);
         }
@@ -214,7 +216,8 @@ final class S3Parser extends AbstractParser
     public function addS3ResultMutator(
         string $mutatorName,
         S3ResultMutator $s3ResultMutator
-    ): void {
+    ): void
+    {
         if (isset($this->s3ResultMutators[$mutatorName])) {
             trigger_error(
                 "The S3 Result Mutator {$mutatorName} already exists!",
@@ -261,7 +264,8 @@ final class S3Parser extends AbstractParser
         StreamInterface $stream,
         StructureShape $member,
         $response
-    ) {
+    )
+    {
         return $this->protocolParser->parseMemberFromStream(
             $stream,
             $member,

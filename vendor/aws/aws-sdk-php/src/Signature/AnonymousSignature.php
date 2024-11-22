@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Signature;
 
 use Aws\Credentials\CredentialsInterface;

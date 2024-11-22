@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Token;
 
 use Aws\Exception\TokenException;
@@ -77,7 +76,7 @@ class SsoTokenProvider implements RefreshableTokenProviderInterface
     {
         if (empty($argConfigFilePath)) {
             return self::getHomeDir() . '/.aws/config';
-        } else {
+        } else{
             return $argConfigFilePath;
         }
     }
@@ -178,7 +177,7 @@ class SsoTokenProvider implements RefreshableTokenProviderInterface
         }
 
         $tokenData['accessToken'] = $response['accessToken'];
-        $tokenData['expiresAt'] = time() + $response['expiresIn'];
+        $tokenData['expiresAt'] = time () + $response['expiresIn'];
         $tokenData['refreshToken'] = $response['refreshToken'];
 
         return $this->writeNewTokenDataToDisk($tokenData, $tokenLocation);

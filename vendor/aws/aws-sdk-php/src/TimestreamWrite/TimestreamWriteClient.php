@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\TimestreamWrite;
 
 use Aws\AwsClient;
@@ -45,6 +44,4 @@ use Aws\AwsClient;
  * @method \Aws\Result writeRecords(array $args = [])
  * @method \GuzzleHttp\Promise\Promise writeRecordsAsync(array $args = [])
  */
-class TimestreamWriteClient extends AwsClient
-{
-}
+class TimestreamWriteClient extends AwsClient {}

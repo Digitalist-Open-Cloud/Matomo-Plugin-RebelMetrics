@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Retry;
 
 use Aws\Exception\AwsException;

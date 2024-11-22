@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\EventBridge;
 
 use Aws\CommandInterface;
@@ -59,8 +58,7 @@ class EventBridgeEndpointMiddleware
         $this->isCustomEndpoint = $isCustomEndpoint;
     }
 
-    public function __invoke(CommandInterface $cmd, RequestInterface $req)
-    {
+    public function __invoke(CommandInterface $cmd, RequestInterface $req) {
         $sigV4aCommands = ['PutEvents'];
         if (in_array($cmd->getName(), $sigV4aCommands)) {
             if (isset($cmd['EndpointId'])) {

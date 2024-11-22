@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\RegionalEndpoint\Exception;
 
 use Aws\HasMonitoringEventsTrait;

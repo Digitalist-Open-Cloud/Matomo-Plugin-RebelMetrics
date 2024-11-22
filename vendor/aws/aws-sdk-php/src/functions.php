@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws;
 
 use GuzzleHttp\Client;
@@ -20,9 +19,7 @@ use GuzzleHttp\Promise\FulfilledPromise;
  */
 function constantly($value)
 {
-    return function () use ($value) {
-        return $value;
-    };
+    return function () use ($value) { return $value; };
 }
 
 /**
@@ -458,8 +455,8 @@ function is_valid_hostlabel($label)
 function parse_ini_file(
     $filename,
     $process_sections = false,
-    $scanner_mode = INI_SCANNER_NORMAL
-) {
+    $scanner_mode = INI_SCANNER_NORMAL)
+{
     return parse_ini_string(
         preg_replace('/^#.*\\n/m', "", file_get_contents($filename)),
         $process_sections,
@@ -513,8 +510,7 @@ function boolean_value($input)
  * @param $filename
  * @return array
  */
-function parse_ini_section_with_subsections($filename, $section_name)
-{
+function parse_ini_section_with_subsections($filename, $section_name) {
     $config = [];
     $stream = fopen($filename, 'r');
 
@@ -531,10 +527,9 @@ function parse_ini_section_with_subsections($filename, $section_name)
             continue;
         }
 
-        if (
-            preg_match('/^\[.*\]$/', $line)
-            && trim($line, '[]') === $section_name
-        ) {
+        if (preg_match('/^\[.*\]$/', $line)
+            && trim($line, '[]') === $section_name)
+        {
             while (!feof($stream)) {
                 $line = trim(fgets($stream));
 
@@ -542,10 +537,9 @@ function parse_ini_section_with_subsections($filename, $section_name)
                     continue;
                 }
 
-                if (
-                    preg_match('/^\[.*\]$/', $line)
-                    && trim($line, '[]') === $section_name
-                ) {
+                if (preg_match('/^\[.*\]$/', $line)
+                    && trim($line, '[]') === $section_name)
+                {
                     continue;
                 } elseif (strpos($line, '[') === 0) {
                     break;
@@ -628,3 +622,4 @@ function is_associative(array $array): bool
 
     return array_keys($array) !== range(0, count($array) - 1);
 }
+

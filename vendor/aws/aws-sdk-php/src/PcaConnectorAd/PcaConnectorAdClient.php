@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PcaConnectorAd;
 
 use Aws\AwsClient;
@@ -57,6 +56,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateTemplateGroupAccessControlEntry(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateTemplateGroupAccessControlEntryAsync(array $args = [])
  */
-class PcaConnectorAdClient extends AwsClient
-{
-}
+class PcaConnectorAdClient extends AwsClient {}

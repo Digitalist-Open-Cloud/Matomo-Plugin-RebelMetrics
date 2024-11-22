@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Signature;
 
 use Aws\Credentials\CredentialsInterface;
@@ -60,7 +59,7 @@ class S3SignatureV4 extends SignatureV4
         RequestInterface $request,
         $signingService,
         ?SigningConfigAWS $signingConfig = null
-    ) {
+    ){
         $this->verifyCRTLoaded();
         $credentials_provider = $this->createCRTStaticCredentialsProvider($credentials);
         $signingConfig = new SigningConfigAWS([

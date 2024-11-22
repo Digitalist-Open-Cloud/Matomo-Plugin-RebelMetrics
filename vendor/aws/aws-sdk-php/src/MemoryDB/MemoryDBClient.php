@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MemoryDB;
 
 use Aws\AwsClient;
@@ -83,6 +82,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateUser(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateUserAsync(array $args = [])
  */
-class MemoryDBClient extends AwsClient
-{
-}
+class MemoryDBClient extends AwsClient {}

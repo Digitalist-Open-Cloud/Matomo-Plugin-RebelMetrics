@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\KinesisVideo;
 
 use Aws\AwsClient;
@@ -67,6 +66,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateStream(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateStreamAsync(array $args = [])
  */
-class KinesisVideoClient extends AwsClient
-{
-}
+class KinesisVideoClient extends AwsClient {}

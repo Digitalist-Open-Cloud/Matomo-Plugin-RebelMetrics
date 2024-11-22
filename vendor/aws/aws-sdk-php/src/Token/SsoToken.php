@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Token;
 
 /**
@@ -51,8 +50,7 @@ class SsoToken extends Token
      */
     public function isExpired()
     {
-        if (
-            isset($this->registrationExpiresAt)
+        if (isset($this->registrationExpiresAt)
             && time() >= $this->registrationExpiresAt
         ) {
             return false;

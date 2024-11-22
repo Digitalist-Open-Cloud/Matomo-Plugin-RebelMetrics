@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws;
 
 use Aws\Exception\AwsException;
@@ -50,8 +49,7 @@ class MockHandler implements \Countable
     public function append()
     {
         foreach (func_get_args() as $value) {
-            if (
-                $value instanceof ResultInterface
+            if ($value instanceof ResultInterface
                 || $value instanceof Exception
                 || is_callable($value)
             ) {

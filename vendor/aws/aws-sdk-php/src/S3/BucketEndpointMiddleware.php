@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\CommandInterface;
@@ -88,7 +87,7 @@ class BucketEndpointMiddleware
         }
 
         $segments = explode('/', $key);
-        foreach ($segments as $segment) {
+        foreach($segments as $segment) {
             if (strpos($segment, $bucket) === 0) {
                 $occurrences++;
             }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Shield;
 
 use Aws\AwsClient;
@@ -79,6 +78,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateSubscription(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateSubscriptionAsync(array $args = [])
  */
-class ShieldClient extends AwsClient
-{
-}
+class ShieldClient extends AwsClient {}

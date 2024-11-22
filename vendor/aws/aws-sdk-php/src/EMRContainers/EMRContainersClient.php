@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\EMRContainers;
 
 use Aws\AwsClient;
@@ -53,6 +52,4 @@ use Aws\AwsClient;
  * @method \Aws\Result untagResource(array $args = [])
  * @method \GuzzleHttp\Promise\Promise untagResourceAsync(array $args = [])
  */
-class EMRContainersClient extends AwsClient
-{
-}
+class EMRContainersClient extends AwsClient {}

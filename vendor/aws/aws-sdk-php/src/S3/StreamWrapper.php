@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\CacheInterface;
@@ -136,8 +135,7 @@ class StreamWrapper
 
     public function stream_close()
     {
-        if (
-            !$this->isFlushed
+        if (!$this->isFlushed
             && empty($this->body->getSize())
             && $this->mode !== 'r'
         ) {
@@ -157,14 +155,11 @@ class StreamWrapper
             return $this->triggerError($errors);
         }
 
-        return $this->boolCall(function () {
+        return $this->boolCall(function() {
             switch ($this->mode) {
-                case 'r':
-                    return $this->openReadStream();
-                case 'a':
-                    return $this->openAppendStream();
-                default:
-                    return $this->openWriteStream();
+                case 'r': return $this->openReadStream();
+                case 'a': return $this->openAppendStream();
+                default: return $this->openWriteStream();
             }
         });
     }
@@ -178,7 +173,7 @@ class StreamWrapper
     {
         // Check if stream body size has been
         // calculated via a flush or close
-        if ($this->body->getSize() === null && $this->mode !== 'r') {
+        if($this->body->getSize() === null && $this->mode !== 'r') {
             return $this->triggerError(
                 "Unable to determine stream size. Did you forget to close or flush the stream?"
             );
@@ -197,8 +192,7 @@ class StreamWrapper
 
         // Attempt to guess the ContentType of the upload based on the
         // file extension of the key
-        if (
-            !isset($params['ContentType']) &&
+        if (!isset($params['ContentType']) &&
             ($type = Psr7\MimeType::fromFilename($params['Key']))
         ) {
             $params['ContentType'] = $type;
@@ -227,9 +221,7 @@ class StreamWrapper
 
     public function stream_tell()
     {
-        return $this->boolCall(function () {
-            return $this->body->tell();
-        });
+        return $this->boolCall(function() { return $this->body->tell(); });
     }
 
     public function stream_write($data)
@@ -307,8 +299,7 @@ class StreamWrapper
         return $this->boolCall(function () use ($parts, $path) {
             try {
                 $result = $this->getClient()->headObject($parts);
-                if (
-                    substr($parts['Key'], -1, 1) == '/' &&
+                if (substr($parts['Key'], -1, 1) == '/' &&
                     $result['ContentLength'] == 0
                 ) {
                     // Return as if it is a bucket to account for console
@@ -339,8 +330,7 @@ class StreamWrapper
         // Stat "directories": buckets, or "s3://"
         $method = self::$useV2Existence ? 'doesBucketExistV2' : 'doesBucketExist';
 
-        if (
-            !$parts['Bucket'] ||
+        if (!$parts['Bucket'] ||
             $this->getClient()->$method($parts['Bucket'])
         ) {
             return $this->formatUrlStat($path);
@@ -482,7 +472,7 @@ class StreamWrapper
      */
     public function dir_rewinddir()
     {
-        return $this->boolCall(function () {
+        return $this->boolCall(function() {
             $this->objectIterator = null;
             $this->dir_opendir($this->openedPath, null);
             return true;
@@ -612,13 +602,11 @@ class StreamWrapper
         if ($mode === 'x') {
             $method = self::$useV2Existence ? 'doesObjectExistV2' : 'doesObjectExist';
 
-            if (
-                $this->getClient()->$method(
-                    $this->getOption('Bucket'),
-                    $this->getOption('Key'),
-                    $this->getOptions(true)
-                )
-            ) {
+            if ($this->getClient()->$method(
+                $this->getOption('Bucket'),
+                $this->getOption('Key'),
+                $this->getOptions(true)
+            )) {
                 $errors[] = "{$path} already exists on Amazon S3";
             }
         }
@@ -854,12 +842,10 @@ class StreamWrapper
         // Fail if this pseudo directory key already exists
         $method = self::$useV2Existence ? 'doesObjectExistV2' : 'doesObjectExist';
 
-        if (
-            $this->getClient()->$method(
-                $params['Bucket'],
-                $params['Key']
-            )
-        ) {
+        if ($this->getClient()->$method(
+            $params['Bucket'],
+            $params['Key']
+        )) {
             return $this->triggerError("Subfolder already exists: {$path}");
         }
 
@@ -910,12 +896,9 @@ class StreamWrapper
     private function determineAcl($mode)
     {
         switch (substr(decoct($mode), 0, 1)) {
-            case '7':
-                return 'public-read';
-            case '6':
-                return 'authenticated-read';
-            default:
-                return 'private';
+            case '7': return 'public-read';
+            case '6': return 'authenticated-read';
+            default: return 'private';
         }
     }
 

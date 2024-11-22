@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\GroundStation;
 
 use Aws\AwsClient;
@@ -73,6 +72,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateMissionProfile(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateMissionProfileAsync(array $args = [])
  */
-class GroundStationClient extends AwsClient
-{
-}
+class GroundStationClient extends AwsClient {}

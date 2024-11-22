@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PinpointEmail;
 
 use Aws\AwsClient;
@@ -91,6 +90,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateConfigurationSetEventDestination(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateConfigurationSetEventDestinationAsync(array $args = [])
  */
-class PinpointEmailClient extends AwsClient
-{
-}
+class PinpointEmailClient extends AwsClient {}

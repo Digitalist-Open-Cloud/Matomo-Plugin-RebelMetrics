@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\LicenseManagerUserSubscriptions;
 
 use Aws\AwsClient;
@@ -41,6 +40,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateIdentityProviderSettings(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateIdentityProviderSettingsAsync(array $args = [])
  */
-class LicenseManagerUserSubscriptionsClient extends AwsClient
-{
-}
+class LicenseManagerUserSubscriptionsClient extends AwsClient {}

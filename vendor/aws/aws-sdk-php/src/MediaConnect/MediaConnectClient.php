@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MediaConnect;
 
 use Aws\AwsClient;
@@ -111,6 +110,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateGatewayInstance(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateGatewayInstanceAsync(array $args = [])
  */
-class MediaConnectClient extends AwsClient
-{
-}
+class MediaConnectClient extends AwsClient {}

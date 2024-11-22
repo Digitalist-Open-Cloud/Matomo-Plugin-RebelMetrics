@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\CostOptimizationHub;
 
 use Aws\AwsClient;
@@ -21,6 +20,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updatePreferences(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updatePreferencesAsync(array $args = [])
  */
-class CostOptimizationHubClient extends AwsClient
-{
-}
+class CostOptimizationHubClient extends AwsClient {}

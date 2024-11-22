@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PCS;
 
 use Aws\AwsClient;
@@ -43,6 +42,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateQueue(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateQueueAsync(array $args = [])
  */
-class PCSClient extends AwsClient
-{
-}
+class PCSClient extends AwsClient {}

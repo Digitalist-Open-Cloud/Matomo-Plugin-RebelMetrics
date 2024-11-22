@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use GuzzleHttp\Psr7;
@@ -80,11 +79,9 @@ trait EncryptionTrait
                 . ' an integer.');
         }
 
-        if (
-            !MaterialsProvider::isSupportedKeySize(
-                $cipherOptions['KeySize']
-            )
-        ) {
+        if (!MaterialsProvider::isSupportedKeySize(
+            $cipherOptions['KeySize']
+        )) {
             throw new \InvalidArgumentException('The cipher "KeySize" requested'
                 . ' is not supported by AES (128, 192, or 256).');
         }

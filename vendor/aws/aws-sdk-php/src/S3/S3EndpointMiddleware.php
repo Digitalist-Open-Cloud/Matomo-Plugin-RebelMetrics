@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Arn\ArnParser;
@@ -165,8 +164,7 @@ class S3EndpointMiddleware
             return self::DUALSTACK;
         }
 
-        if (
-            !$pathStyle
+        if (!$pathStyle
             && self::isRequestHostStyleCompatible($command, $request)
         ) {
             return self::HOST_STYLE;
@@ -198,9 +196,9 @@ class S3EndpointMiddleware
         $uri = $request->getUri();
         $request = $request->withUri(
             $uri->withHost($this->getBucketStyleHost(
-                $command,
-                $uri->getHost()
-            ))
+                    $command,
+                    $uri->getHost()
+                ))
                 ->withPath($this->getBucketlessPath(
                     $uri->getPath(),
                     $command
@@ -243,8 +241,7 @@ class S3EndpointMiddleware
             $request->getUri()->withHost($this->getDualStackHost())
         );
 
-        if (
-            empty($command['@use_path_style_endpoint'])
+        if (empty($command['@use_path_style_endpoint'])
             && !$this->pathStyleByDefault
             && self::isRequestHostStyleCompatible($command, $request)
         ) {
@@ -289,7 +286,7 @@ class S3EndpointMiddleware
     {
         $pattern = '/^\\/' . preg_quote($command['Bucket'], '/') . '/';
         $path = preg_replace($pattern, '', $path) ?: '/';
-        if (substr($path, 0, 1) !== '/') {
+        if (substr($path, 0 , 1) !== '/') {
             $path = '/' . $path;
         }
         return $path;
@@ -333,7 +330,7 @@ class S3EndpointMiddleware
             );
         $uri = $request->getUri();
         $scheme = $uri->getScheme();
-        if (empty($scheme)) {
+        if(empty($scheme)){
             $request = $request->withUri(
                 $uri->withHost($host)
             );

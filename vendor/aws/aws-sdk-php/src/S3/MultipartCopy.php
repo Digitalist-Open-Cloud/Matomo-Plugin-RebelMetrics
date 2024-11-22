@@ -238,4 +238,5 @@ class MultipartCopy extends AbstractUploadManager
         $sourceBuilder .= ltrim(rawurldecode($inputSource), '/');
         return $sourceBuilder;
     }
+
 }

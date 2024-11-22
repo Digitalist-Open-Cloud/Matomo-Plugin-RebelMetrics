@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\VPCLattice;
 
 use Aws\AwsClient;
@@ -111,6 +110,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateTargetGroup(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateTargetGroupAsync(array $args = [])
  */
-class VPCLatticeClient extends AwsClient
-{
-}
+class VPCLatticeClient extends AwsClient {}

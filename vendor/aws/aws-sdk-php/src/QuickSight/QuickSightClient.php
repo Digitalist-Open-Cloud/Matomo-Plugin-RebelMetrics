@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\QuickSight;
 
 use Aws\AwsClient;
@@ -403,6 +402,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateVPCConnection(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateVPCConnectionAsync(array $args = [])
  */
-class QuickSightClient extends AwsClient
-{
-}
+class QuickSightClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Handler\GuzzleV6;
 
 use Exception;
@@ -74,10 +73,7 @@ class GuzzleHandler
 
             $options['on_stats'] = static function (
                 TransferStats $stats
-            ) use (
-                $fn,
-                $prev
-) {
+            ) use ($fn, $prev) {
                 if (is_callable($prev)) {
                     $prev($stats);
                 }

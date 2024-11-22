@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\MediaStoreData;
 
 use Aws\AwsClient;
@@ -17,6 +16,4 @@ use Aws\AwsClient;
  * @method \Aws\Result putObject(array $args = [])
  * @method \GuzzleHttp\Promise\Promise putObjectAsync(array $args = [])
  */
-class MediaStoreDataClient extends AwsClient
-{
-}
+class MediaStoreDataClient extends AwsClient {}

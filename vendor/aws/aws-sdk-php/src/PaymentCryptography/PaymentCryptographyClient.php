@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\PaymentCryptography;
 
 use Aws\AwsClient;
@@ -47,6 +46,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateAlias(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateAliasAsync(array $args = [])
  */
-class PaymentCryptographyClient extends AwsClient
-{
-}
+class PaymentCryptographyClient extends AwsClient {}

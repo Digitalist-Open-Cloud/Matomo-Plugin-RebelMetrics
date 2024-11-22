@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\Credentials\CredentialsInterface;
@@ -144,8 +143,7 @@ class PostObjectV4
     {
         $uri = new Uri($this->client->getEndpoint());
 
-        if (
-            $this->client->getConfig('use_path_style_endpoint') === true
+        if ($this->client->getConfig('use_path_style_endpoint') === true
             || ($uri->getScheme() === 'https'
             && strpos($this->bucket, '.') !== false)
         ) {
@@ -164,7 +162,7 @@ class PostObjectV4
     protected function getPolicyAndSignature(
         CredentialsInterface $credentials,
         array $policy
-    ) {
+    ){
         $ldt = gmdate(SignatureV4::ISO8601_BASIC);
         $sdt = substr($ldt, 0, 8);
         $policy['conditions'][] = ['X-Amz-Date' => $ldt];

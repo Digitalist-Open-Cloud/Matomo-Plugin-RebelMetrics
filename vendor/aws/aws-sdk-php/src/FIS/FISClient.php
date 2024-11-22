@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\FIS;
 
 use Aws\AwsClient;
@@ -59,6 +58,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateTargetAccountConfiguration(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateTargetAccountConfigurationAsync(array $args = [])
  */
-class FISClient extends AwsClient
-{
-}
+class FISClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\QApps;
 
 use Aws\AwsClient;
@@ -63,6 +62,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateQAppSession(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateQAppSessionAsync(array $args = [])
  */
-class QAppsClient extends AwsClient
-{
-}
+class QAppsClient extends AwsClient {}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\OSIS;
 
 use Aws\AwsClient;
@@ -35,6 +34,4 @@ use Aws\AwsClient;
  * @method \Aws\Result validatePipeline(array $args = [])
  * @method \GuzzleHttp\Promise\Promise validatePipelineAsync(array $args = [])
  */
-class OSISClient extends AwsClient
-{
-}
+class OSISClient extends AwsClient {}

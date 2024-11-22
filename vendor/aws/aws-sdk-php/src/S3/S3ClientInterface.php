@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws\AwsClientInterface;

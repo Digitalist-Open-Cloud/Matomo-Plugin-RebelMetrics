@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Identity\S3;
 
 use Aws;

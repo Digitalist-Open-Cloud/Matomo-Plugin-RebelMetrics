@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\UseArnRegion;
 
 use Aws\AbstractConfigurationProvider;
@@ -42,7 +41,8 @@ use GuzzleHttp\Promise;
  * $config = $promise->wait();
  * </code>
  */
-class ConfigurationProvider extends AbstractConfigurationProvider implements ConfigurationProviderInterface
+class ConfigurationProvider extends AbstractConfigurationProvider
+    implements ConfigurationProviderInterface
 {
     const ENV_USE_ARN_REGION = 'AWS_S3_USE_ARN_REGION';
     const INI_USE_ARN_REGION = 's3_use_arn_region';
@@ -83,8 +83,7 @@ class ConfigurationProvider extends AbstractConfigurationProvider implements Con
             call_user_func_array([ConfigurationProvider::class, 'chain'], $configProviders)
         );
 
-        if (
-            isset($config['use_arn_region'])
+        if (isset($config['use_arn_region'])
             && $config['use_arn_region'] instanceof CacheInterface
         ) {
             return self::cache($memo, $config['use_arn_region'], self::$cacheKey);

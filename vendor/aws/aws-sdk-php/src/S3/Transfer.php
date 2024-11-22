@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3;
 
 use Aws;
@@ -104,7 +103,8 @@ class Transfer implements PromisorInterface
         if ($this->sourceMetadata['scheme'] === $this->destination['scheme']) {
             throw new \InvalidArgumentException("You cannot copy from"
                 . " {$this->sourceMetadata['scheme']} to"
-                . " {$this->destination['scheme']}.");
+                . " {$this->destination['scheme']}."
+            );
         }
 
         // Handle multipart-related options.
@@ -241,7 +241,7 @@ class Transfer implements PromisorInterface
                     return true;
                 }
             } else {
-                $resolved [] = $section;
+                $resolved []= $section;
             }
         }
         return false;
@@ -268,9 +268,7 @@ class Transfer implements PromisorInterface
                 throw new AwsException(
                     'Cannot download key ' . $objectKey
                     . ', its relative path resolves outside the'
-                    . ' parent directory',
-                    $command
-                );
+                    . ' parent directory', $command);
             }
 
             // Create the directory if needed.
@@ -280,7 +278,7 @@ class Transfer implements PromisorInterface
             }
 
             // Create the command.
-            $commands [] = $command;
+            $commands []= $command;
         }
 
         // Create a GetObject command pool and return the promise.
@@ -313,9 +311,7 @@ class Transfer implements PromisorInterface
         if (is_string($this->source)) {
             return Aws\filter(
                 Aws\recursive_dir_iterator($this->sourceMetadata['path']),
-                function ($file) {
-                    return !is_dir($file);
-                }
+                function ($file) { return !is_dir($file); }
             );
         }
 
@@ -384,7 +380,7 @@ class Transfer implements PromisorInterface
         );
 
         if (isset($this->s3Args['Key'])) {
-            return rtrim($this->s3Args['Key'], '/') . '/' . $relative_file_path;
+            return rtrim($this->s3Args['Key'], '/').'/'.$relative_file_path;
         }
 
         return $relative_file_path;
@@ -398,12 +394,7 @@ class Transfer implements PromisorInterface
 
         $this->before = static function (
             CommandInterface $command
-        ) use (
-            $before,
-            $debug,
-            $sourcePath,
-            $s3Args
-) {
+        ) use ($before, $debug, $sourcePath, $s3Args) {
             // Call the composed before function.
             $before and $before($command);
 

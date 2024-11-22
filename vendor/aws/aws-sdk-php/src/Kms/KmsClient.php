@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Kms;
 
 use Aws\AwsClient;
@@ -114,6 +113,4 @@ use Aws\AwsClient;
  * @method \Aws\Result verifyMac(array $args = [])
  * @method \GuzzleHttp\Promise\Promise verifyMacAsync(array $args = [])
  */
-class KmsClient extends AwsClient
-{
-}
+class KmsClient extends AwsClient {}

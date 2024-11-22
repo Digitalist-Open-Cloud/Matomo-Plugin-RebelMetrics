@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\SSMContacts;
 
 use Aws\AwsClient;
@@ -85,6 +84,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateRotation(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateRotationAsync(array $args = [])
  */
-class SSMContactsClient extends AwsClient
-{
-}
+class SSMContactsClient extends AwsClient {}

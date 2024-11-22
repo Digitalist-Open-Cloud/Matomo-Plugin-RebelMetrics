@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\Crypto;
 
 use Aws\Crypto\DecryptionTraitV2;
@@ -329,8 +328,7 @@ class S3EncryptionClientV2 extends AbstractCryptoClientV2
         $strategy = $this->getMetadataStrategy($args, $instructionFileSuffix);
         unset($args['@MetadataStrategy']);
 
-        if (
-            !isset($args['@SecurityProfile'])
+        if (!isset($args['@SecurityProfile'])
             || !in_array($args['@SecurityProfile'], self::$supportedSecurityProfiles)
         ) {
             throw new CryptoException("@SecurityProfile is required and must be"
@@ -338,8 +336,7 @@ class S3EncryptionClientV2 extends AbstractCryptoClientV2
         }
 
         // Only throw this legacy warning once per client
-        if (
-            in_array($args['@SecurityProfile'], self::$legacySecurityProfiles)
+        if (in_array($args['@SecurityProfile'], self::$legacySecurityProfiles)
             && $this->legacyWarningCount < 1
         ) {
             $this->legacyWarningCount++;

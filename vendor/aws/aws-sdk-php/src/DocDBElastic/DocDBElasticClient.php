@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\DocDBElastic;
 
 use Aws\AwsClient;
@@ -45,6 +44,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateCluster(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateClusterAsync(array $args = [])
  */
-class DocDBElasticClient extends AwsClient
-{
-}
+class DocDBElasticClient extends AwsClient {}

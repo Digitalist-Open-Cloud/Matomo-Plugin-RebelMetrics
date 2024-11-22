@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\ServiceQuotas;
 
 use Aws\AwsClient;
@@ -45,6 +44,4 @@ use Aws\AwsClient;
  * @method \Aws\Result untagResource(array $args = [])
  * @method \GuzzleHttp\Promise\Promise untagResourceAsync(array $args = [])
  */
-class ServiceQuotasClient extends AwsClient
-{
-}
+class ServiceQuotasClient extends AwsClient {}

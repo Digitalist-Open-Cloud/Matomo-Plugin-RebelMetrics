@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Crypto;
 
 use Aws\Crypto\Cipher\CipherMethod;

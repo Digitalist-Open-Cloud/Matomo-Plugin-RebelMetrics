@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\LakeFormation;
 
 use Aws\AwsClient;
@@ -127,6 +126,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateTableStorageOptimizer(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateTableStorageOptimizerAsync(array $args = [])
  */
-class LakeFormationClient extends AwsClient
-{
-}
+class LakeFormationClient extends AwsClient {}

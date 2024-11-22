@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\KinesisAnalyticsV2;
 
 use Aws\AwsClient;
@@ -73,6 +72,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateApplicationMaintenanceConfiguration(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateApplicationMaintenanceConfigurationAsync(array $args = [])
  */
-class KinesisAnalyticsV2Client extends AwsClient
-{
-}
+class KinesisAnalyticsV2Client extends AwsClient {}

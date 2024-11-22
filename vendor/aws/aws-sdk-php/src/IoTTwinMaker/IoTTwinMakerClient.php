@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\IoTTwinMaker;
 
 use Aws\AwsClient;
@@ -87,6 +86,4 @@ use Aws\AwsClient;
  * @method \Aws\Result updateWorkspace(array $args = [])
  * @method \GuzzleHttp\Promise\Promise updateWorkspaceAsync(array $args = [])
  */
-class IoTTwinMakerClient extends AwsClient
-{
-}
+class IoTTwinMakerClient extends AwsClient {}

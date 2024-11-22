@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Retry;
 
 use Aws\Exception\AwsException;
@@ -31,12 +30,12 @@ trait RetryHelperTrait
 
         if ($value instanceof AwsException) {
             $resultStats = $value->getTransferInfo();
-            $stats['http'] [] = $resultStats;
+            $stats['http'] []= $resultStats;
         } elseif ($value instanceof ResultInterface) {
             $resultStats = isset($value['@metadata']['transferStats']['http'][0])
                 ? $value['@metadata']['transferStats']['http'][0]
                 : [];
-            $stats['http'] [] = $resultStats;
+            $stats['http'] []= $resultStats;
         }
     }
 

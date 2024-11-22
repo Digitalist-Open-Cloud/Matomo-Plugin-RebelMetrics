@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Shield\Exception;
 
 use Aws\Exception\AwsException;
@@ -7,6 +6,4 @@ use Aws\Exception\AwsException;
 /**
  * Represents an error interacting with the **AWS Shield** service.
  */
-class ShieldException extends AwsException
-{
-}
+class ShieldException extends AwsException {}

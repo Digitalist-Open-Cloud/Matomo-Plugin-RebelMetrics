@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\Retry;
 
 use Aws\AbstractConfigurationProvider;
@@ -43,7 +42,8 @@ use GuzzleHttp\Promise\PromiseInterface;
  * $config = $promise->wait();
  * </code>
  */
-class ConfigurationProvider extends AbstractConfigurationProvider implements ConfigurationProviderInterface
+class ConfigurationProvider extends AbstractConfigurationProvider
+    implements ConfigurationProviderInterface
 {
     const DEFAULT_MAX_ATTEMPTS = 3;
     const DEFAULT_MODE = 'legacy';
@@ -88,8 +88,7 @@ class ConfigurationProvider extends AbstractConfigurationProvider implements Con
             call_user_func_array([ConfigurationProvider::class, 'chain'], $configProviders)
         );
 
-        if (
-            isset($config['retries'])
+        if (isset($config['retries'])
             && $config['retries'] instanceof CacheInterface
         ) {
             return self::cache($memo, $config['retries'], self::$cacheKey);
