@@ -27,6 +27,8 @@ use Piwik\Plugins\RebelMetrics\GetQuery;
 use Piwik\Db;
 use Exception;
 use Piwik\Common;
+use Piwik\Log\LoggerInterface;
+use Piwik\Container\StaticContainer;
 
 class Exporter
 {
@@ -35,9 +37,15 @@ class Exporter
      */
     private $settings;
 
-    public function __construct($settings)
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    public function __construct($settings, LoggerInterface $logger = null)
     {
         $this->settings = $settings;
+        $this->logger = $logger ?: StaticContainer::get(LoggerInterface::class);
     }
     public function doExport($day = null)
     {
@@ -49,7 +57,7 @@ class Exporter
         try {
             $query = $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
         } catch (Exception $e) {
-            echo "An error occurred: " . $e->getMessage();
+            $this->logger->error('An error occurred: ' . $e->getMessage());
         }
         if ($day === null) {
             $day = date('Y-m-d', strtotime('yesterday'));
@@ -58,14 +66,14 @@ class Exporter
         try {
             $results = Db::fetchAll($query, [$day]);
         } catch (Exception $e) {
-            echo "An error occurred: " . $e->getMessage();
+            $this->logger->error('An error occurred: ' . $e->getMessage());
         }
 
         $filePath = "$exportDir/$day.csv";
         $file = fopen($filePath, 'w');
 
         if ($file === false) {
-            die('Error opening the file for writing.');
+            $this->logger->error('Error opening the file for writing.');
         }
 
         try {
@@ -80,7 +88,7 @@ class Exporter
                 }
             }
         } catch (Exception $e) {
-            echo "An error occurred while writing to the file: " . $e->getMessage();
+            $this->logger->error('An error occurred while writing to the file: ' . $e->getMessage());
         } finally {
             // Close the file after writing
             fclose($file);
