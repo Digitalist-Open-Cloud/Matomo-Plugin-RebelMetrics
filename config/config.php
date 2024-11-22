@@ -21,6 +21,7 @@
 
 return [
      'diagnostics.optional' => Piwik\DI::add([
+         Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\ConfigurationSet'),
          Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\ExportDirectoryIsWriteable'),
          Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\GzipAvailable'),
          Piwik\DI::get('Piwik\Plugins\RebelMetrics\Diagnostic\S3ClassAvailable'),

@@ -24,9 +24,9 @@ namespace Piwik\Plugins\RebelMetrics;
 use Piwik\Piwik;
 use Piwik\Settings\Setting;
 use Piwik\Settings\FieldConfig;
-use Piwik\Validators\NotEmpty;
 use Piwik\Settings\Plugin\SystemSettings as MatomoSettings;
 use DateTime;
+use Exception;
 
 /**
  * Defines settings for RebelMetrics.
@@ -67,11 +67,16 @@ class SystemSettings extends MatomoSettings
 
     private function exportHistoricalData()
     {
-        return $this->makeSetting('exportHistoricalData', null, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('RebelMetrics_ExportHistoricalData');
-            $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
-            $field->description = Piwik::translate('RebelMetrics_ExportHistoricalDataDescription');
-        });
+        return $this->makeSetting(
+            'exportHistoricalData',
+            $default = false,
+            FieldConfig::TYPE_BOOL,
+            function (FieldConfig $field) {
+                $field->title = Piwik::translate('RebelMetrics_ExportHistoricalData');
+                $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
+                $field->description = Piwik::translate('RebelMetrics_ExportHistoricalDataDescription');
+            }
+        );
     }
     private function historicalDataDate()
     {
@@ -82,7 +87,7 @@ class SystemSettings extends MatomoSettings
             $field->condition = 'exportHistoricalData';
             $field->validate = function ($value, $setting) {
                 if (!empty($value) && !$this->isValidDate($value)) {
-                    throw new \Exception(Piwik::translate('RebelMetrics_ExportFromValidate'));
+                    throw new Exception(Piwik::translate('RebelMetrics_ExportFromValidate'));
                 }
             };
         });
@@ -117,19 +122,29 @@ class SystemSettings extends MatomoSettings
 
     private function storageKeySetting()
     {
-        return $this->makeSetting('storageKey', $default = null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = Piwik::translate('RebelMetrics_Key');
-            $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = Piwik::translate('RebelMetrics_KeyDescription');
-        });
+        return $this->makeSetting(
+            'storageKey',
+            $default = null,
+            FieldConfig::TYPE_STRING,
+            function (FieldConfig $field) {
+                $field->title = Piwik::translate('RebelMetrics_Key');
+                $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
+                $field->description = Piwik::translate('RebelMetrics_KeyDescription');
+            }
+        );
     }
     private function storageSecretSetting()
     {
-        return $this->makeSetting('storageSecret', $default = null, FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = Piwik::translate('RebelMetrics_Secret');
-            $field->uiControl = FieldConfig::UI_CONTROL_PASSWORD;
-            $field->description = Piwik::translate('RebelMetrics_SecretDescription');
-        });
+        return $this->makeSetting(
+            'storageSecret',
+            $default = null,
+            FieldConfig::TYPE_STRING,
+            function (FieldConfig $field) {
+                $field->title = Piwik::translate('RebelMetrics_Secret');
+                $field->uiControl = FieldConfig::UI_CONTROL_PASSWORD;
+                $field->description = Piwik::translate('RebelMetrics_SecretDescription');
+            }
+        );
     }
 
     private function isValidDate($date)

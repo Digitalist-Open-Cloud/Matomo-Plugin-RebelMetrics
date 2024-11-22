@@ -25,7 +25,8 @@ require_once(PIWIK_INCLUDE_PATH . '/plugins/RebelMetrics/vendor/autoload.php');
 use Aws\S3\S3Client;
 use Piwik\Plugins\RebelMetrics\GetQuery;
 use Piwik\Db;
-
+use Exception;
+use Piwik\Common;
 
 class Exporter
 {
@@ -43,19 +44,20 @@ class Exporter
         $settings = new SystemSettings();
         $exportDir = $this->settings->exportDir->getValue();
         $queryProcessor = new GetQuery($settings);
+        $start = date('Y-m-d H:i:s');
 
         try {
             $query = $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo "An error occurred: " . $e->getMessage();
         }
         if ($day === null) {
-            $day = date('Y-m-d', strtotime('yesterday'));
+            $day = date('Y-m-d', strtotime('today'));
         }
 
         try {
             $results = Db::fetchAll($query, [$day]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo "An error occurred: " . $e->getMessage();
         }
 
@@ -77,7 +79,7 @@ class Exporter
                     fputcsv($file, $row);
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo "An error occurred while writing to the file: " . $e->getMessage();
         } finally {
             // Close the file after writing
@@ -108,6 +110,33 @@ class Exporter
           'Key'    => "$day.csv.gz",
           'SourceFile' => "$filePath.gz",
         ]);
+        $size = filesize("$filePath.gz");
         unlink("$filePath.gz");
+
+        // Set status of the export.
+        $done = date('Y-m-d H:i:s');
+        $status = 1;
+        $this->setStatus($start, $status, $size, $done);
+    }
+
+    private function getDb()
+    {
+        return Db::get();
+    }
+
+    private function setStatus($start, $status, $size, $done)
+    {
+        $db = $this->getDb();
+        $query = "INSERT INTO `" . Common::prefixTable('rebelmetrics_status') . "`
+        (date, status, size, done) VALUES (?,?,?,?)";
+        $params = [$start, $status, $size, $done];
+        $db->query($query, $params);
+    }
+
+    private function humanFilesize($bytes, $decimals = 2)
+    {
+        $size = 'BKMGTP';
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 }

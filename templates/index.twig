@@ -30,6 +30,10 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td>{{ 'RebelMetrics_Configured'|translate }}</td>
+                        <td>{{ isSetup|raw }}</td>
+                    </tr>
+                    <tr>
                       <td>{{ 'RebelMetrics_ExportFolderWriteable'|translate }}</td>
                       <td>{{ exportWrite|raw }}</td>
                     </tr>
@@ -53,6 +57,11 @@
                         <td>{{ 'RebelMetrics_IsQueryPresent'|translate }}</td>
                         <td>{{ isQueryPresent|raw }}</td>
                     </tr>
+                    <tr>
+                        <td>{{ 'RebelMetrics_IsPluginsPresent'|translate }}</td>
+                        <td>{{ isPluginsPresent|raw }}</td>
+                    </tr>
+
                     </tbody>
                     </table>
             </div>

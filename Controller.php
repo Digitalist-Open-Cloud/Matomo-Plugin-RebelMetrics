@@ -29,6 +29,7 @@ class Controller extends \Piwik\Plugin\Controller
 {
     public function index()
     {
+        Piwik::checkUserHasSomeAdminAccess();
         $settings = new SystemSettings();
         $check = new Rebel($settings);
         $checks = [
@@ -38,6 +39,8 @@ class Controller extends \Piwik\Plugin\Controller
             'storageValid' => $this->getStatusIcon($check->isStorageValid()),
             'isGzipable' => $this->getStatusIcon($check->isGzipable()),
             'isQueryPresent' => $this->getStatusIcon($check->isQueryPresent()),
+            'isPluginsPresent' => $this->getStatusIcon($check->isPluginsPresent()),
+            'isSetup' => $this->getStatusIcon($check->isSetup()),
         ];
 
         return $this->renderTemplate('index', $checks);

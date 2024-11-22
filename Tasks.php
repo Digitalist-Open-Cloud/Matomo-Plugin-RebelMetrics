@@ -48,21 +48,36 @@ class Tasks extends Task
 
     public function schedule()
     {
-        $this->daily('rebelExport', null, self::HIGH_PRIORITY);
-        $this->daily('rebelCleanup', null, self::LOWEST_PRIORITY);
+
+            $this->daily('rebelExports', null, self::HIGH_PRIORITY);
+            $this->daily('rebelCleanup', null, self::LOWEST_PRIORITY);
     }
 
-    public function rebelExport()
+    public function rebelExports()
     {
-        $this->logger->info('Starting RebelMetrics export');
+
         $settings = new SystemSettings();
-        try {
-            $exporter = new Exporter($settings);
-            $exporter->doExport();
-            $this->logger->info('RebelMetrics export done');
-        } catch (Exception $e) {
-            $this->logger->error($e->getMessage());
-            throw new RetryableException($e->getMessage());
+        $check = new Rebel($settings);
+        if (
+            $check->isExportWriteable() &&
+            $check->isGzipAvailable() &&
+            $check->isS3ClassAvailable() &&
+            $check->isStorageValid() &&
+            $check->isGzipable() &&
+            $check->isQueryPresent() &&
+            $check->isPluginsPresent()
+        ) {
+            $this->logger->info('Starting RebelMetrics export');
+            $settings = new SystemSettings();
+            try {
+                $exporter = new Exporter($settings);
+                $exporter->doExport();
+                $this->logger->info('RebelMetrics export done');
+            } catch (Exception $e) {
+                $this->logger->error($e->getMessage());
+            }
+        } else {
+            $this->logger->error('Checks did not pass');
         }
     }
 
@@ -70,7 +85,6 @@ class Tasks extends Task
     {
         $this->logger->info('Starting RebelMetrics cleanup');
         try {
-            // do something
             $this->logger->info('Cleanup of RebelMetrics done');
         } catch (Exception $e) {
             throw new RetryableException($e->getMessage());

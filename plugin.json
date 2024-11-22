@@ -1,23 +1,21 @@
 {
     "name": "RebelMetrics",
     "description": "Powerful dashboards for your Matomo data",
-    "version": "0.1.0",
+    "version": "5.0.0",
     "theme": false,
     "require": {
-        "matomo": ">=5.1.2-stable,<6.0.0-b1"
+        "matomo": ">=5.0.0-stable,<6.0.0-b1"
     },
     "authors": [
         {
-            "name": "Matomo",
-            "email": "",
-            "homepage": ""
+            "name": "Digitalist Open Cloud",
+            "email": "cloud@digitalist.com",
+            "homepage": "https://digitalist.cloud"
         }
     ],
     "support": {
-        "email": "",
+        "email": "cloud@digitalist.com",
         "issues": "",
-        "forum": "",
-        "irc": "",
         "wiki": "",
         "source": "",
         "docs": "",

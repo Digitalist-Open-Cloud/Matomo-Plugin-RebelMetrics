@@ -9,9 +9,9 @@
       "ExportFolderWriteable": "Export folder is writeable",
       "ExportFolderWriteableOk": "Plugin can write to defined directory.",
       "ExportFolderWriteableError": "Plugin can not write to defined directory.",
-      "GzipExists": "Gzip extension exists in PHP",
-      "GzipExistsOk": "Gzip PHP extension exists.",
-      "GzipExistsError": "Gzip PHP extension does not exist.",
+      "GzipExists": "Gzip works in PHP",
+      "GzipExistsOk": "Gzip in PHP works.",
+      "GzipExistsError": "Gzip in PHP does not work.",
       "S3LibExists": "Upload code exists.",
       "S3LibExistsOk": "Upload library exists.",
       "S3LibExistsError": "Upload library does not exist.",
@@ -40,6 +40,12 @@
       "Secret": "Secret",
       "SecretDescription": "This needs the secret you would have gotten when subscribing to RebelMetrics",
       "TestPassed": "Test passed",
-      "TestFailed": "Test failed"
+      "TestFailed": "Test failed",
+      "IsPluginsPresent": "Needed plugins are present",
+      "Configured": "Needed configuration in place",
+      "IsConfigured": "Needed configuration in place",
+      "IsConfiguredOk": "Configuration is set",
+      "IsConfiguredError": "Configuration is not set"
+
   }
 }

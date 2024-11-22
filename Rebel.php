@@ -25,17 +25,47 @@ require_once(PIWIK_INCLUDE_PATH . '/plugins/RebelMetrics/vendor/autoload.php');
 use Aws\S3\S3Client;
 use Exception;
 use Piwik\Plugins\RebelMetrics\GetQuery;
+use Piwik\Plugin\Manager;
+use Piwik\Log\LoggerInterface;
+use Piwik\Container\StaticContainer;
 
 class Rebel
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
     /**
      * @var SystemSettings
      */
     private $settings;
 
-    public function __construct($settings)
+    public function __construct($settings, LoggerInterface $logger = null)
     {
+        $this->logger = $logger ?: StaticContainer::get(LoggerInterface::class);
         $this->settings = $settings;
+    }
+
+    public function isSetUp()
+    {
+        $exportDir = $this->settings->exportDir->getValue();
+        $storage = $this->settings->storage->getValue();
+        $key = $this->settings->storageKey->getValue();
+        $secret = $this->settings->storageSecret->getValue();
+        $bucket = $this->settings->project->getValue();
+
+        if (
+            $exportDir &&
+            $storage &&
+            $key &&
+            $secret &&
+            $bucket
+        ) {
+            return true;
+        } else {
+            $this->logger->warning("RebelMetrics not configured");
+            return false;
+        }
     }
     public function isExportWriteable()
     {
@@ -63,6 +93,7 @@ class Rebel
                 return false;
             }
         } catch (Exception $e) {
+            $this->logger->error("An error occurred: " . $e->getMessage());
             return false;
         }
     }
@@ -83,6 +114,7 @@ class Rebel
             unlink("$exportDir/test.txt.gz");
             return true;
         } catch (Exception $e) {
+            $this->logger->error("An error occurred: " . $e->getMessage());
             return false;
         }
     }
@@ -96,53 +128,87 @@ class Rebel
             $secret = $this->settings->storageSecret->getValue();
             $bucket = $this->settings->project->getValue();
             $region = 'us-east-1';
-            $client = new S3Client([
-              'version' => 'latest',
-              'region' => $region,
-              'endpoint' => $storage,
-              'credentials' => [
-                'key'    => $key,
-                'secret' => $secret,
-              ],
-            ]);
-            $upload = $client->putObject([
-            'Bucket' => $bucket,
-            'Key'    => 'testfile',
-            'Body'   => 'Hello from RebelMetrics'
-            ]);
-            $get = $client->getObject([
-            'Bucket' => $bucket,
-            'Key'    => 'testfile',
-            'SaveAs' => "$exportDir/testfile_local"
-            ]);
-            $delete = $client->deleteObject([
-              'Bucket' => $bucket,
-              'Key'    => 'testfile',
-            ]);
-            unlink("$exportDir/testfile_local");
+            if ($this->isSetUp()) {
+                $client = new S3Client([
+                    'version' => 'latest',
+                    'region' => $region,
+                    'endpoint' => $storage,
+                    'credentials' => [
+                      'key'    => $key,
+                      'secret' => $secret,
+                    ],
+                  ]);
+                  $upload = $client->putObject([
+                  'Bucket' => $bucket,
+                  'Key'    => 'testfile',
+                  'Body'   => 'Hello from RebelMetrics'
+                  ]);
+                  $get = $client->getObject([
+                  'Bucket' => $bucket,
+                  'Key'    => 'testfile',
+                  'SaveAs' => "$exportDir/testfile_local"
+                  ]);
+                  $delete = $client->deleteObject([
+                    'Bucket' => $bucket,
+                    'Key'    => 'testfile',
+                  ]);
+                  unlink("$exportDir/testfile_local");
 
-            if ($get['Body'] == 'Hello from RebelMetrics') {
-                return true;
-            } else {
-                return false;
+                  if ($get['Body'] == 'Hello from RebelMetrics') {
+                      return true;
+                  } else {
+                      return false;
+                  }
             }
+
         } catch (Exception $e) {
+            $this->logger->error("An error occurred: " . $e->getMessage());
             return false;
         }
     }
-    // @todo - remove temp files.
+
     public function isQueryPresent()
     {
         $settings = new SystemSettings();
         $exportDir = $this->settings->exportDir->getValue();
         $queryProcessor = new GetQuery($settings);
-
-        try {
-            $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
-            return true;
-        } catch (Exception $e) {
-            echo "An error occurred: " . $e->getMessage();
+        if ($this->isSetUp()) {
+            try {
+                $queryProcessor->fetchAndProcessQuery('QUERY', $exportDir);
+                return true;
+            } catch (Exception $e) {
+                $this->logger->error("An error occurred: " . $e->getMessage());
+                return false;
+            }
+        } else {
             return false;
         }
+
+
+    }
+
+    public function isPluginsPresent()
+    {
+        $pluginsToCheck = ['MarketingCampaignsReporting'];
+        if ($this->pluginsPresent($pluginsToCheck)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function pluginsPresent(array $plugins)
+    {
+        $allInstalled = true;
+        $manager = Manager::getInstance();
+
+        foreach ($plugins as $plugin) {
+            if (!$manager->isPluginInstalled($plugin)) {
+                $this->logger->error("Plugin not installed: " . $plugin);
+                $allInstalled = false;
+            }
+        }
+
+        return $allInstalled;
     }
 }

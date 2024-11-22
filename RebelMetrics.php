@@ -39,7 +39,7 @@ class RebelMetrics extends \Piwik\Plugin
             $sql = "CREATE TABLE " . Common::prefixTable(self::$statusTable) . " (
                         id INT NOT NULL AUTO_INCREMENT
                         , date datetime NOT NULL
-                        , status VARCHAR(100) NOT NULL
+                        , status TINYINT(1) NOT NULL
                         , size VARCHAR(256) NOT NULL
                         , done datetime
                         , PRIMARY KEY (id)
