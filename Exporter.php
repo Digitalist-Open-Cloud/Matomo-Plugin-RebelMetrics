@@ -52,7 +52,7 @@ class Exporter
             echo "An error occurred: " . $e->getMessage();
         }
         if ($day === null) {
-            $day = date('Y-m-d', strtotime('today'));
+            $day = date('Y-m-d', strtotime('yesterday'));
         }
 
         try {
