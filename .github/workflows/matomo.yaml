@@ -19,10 +19,9 @@ jobs:
           lfs: true
           persist-credentials: false
       - name: Run tests
-        uses: matomo-org/github-action-tests@main
+        uses: Digitalist-Open-Cloud/Matomo-github-action-tests@main
         with:
           plugin-name: 'RebelMetrics'
           php-version: ${{ matrix.php }}
           test-type: 'PluginTests'
           matomo-test-branch: ${{ matrix.target }}
-          artifacts-protected: false
