@@ -1,0 +1,22 @@
+# Name of this GitHub Actions workflow.
+name: Semgrep OSS scan
+
+on:
+  pull_request: {}
+  workflow_dispatch: {}
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: '05 07 * * *'
+
+jobs:
+  semgrep:
+    name: semgrep-oss/scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    # Skip any PR created by dependabot to avoid permission issues:
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan --config auto
