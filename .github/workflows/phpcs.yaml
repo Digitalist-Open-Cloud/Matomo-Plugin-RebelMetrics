@@ -30,5 +30,6 @@ jobs:
       - name: Check PHP code styles
         id: phpcs
         run: ./vendor/bin/phpcs --report-full --standard=tests/phpcs.xml --report-checkstyle=./phpcs-report.xml
-      - name: Show PHPCS results
-        run: cs2pr ./phpcs-report.xml --prepend-filename
+      - name: Show PHPCS results in PR
+        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
+        run: cs2pr ./phpcs-report.xml
