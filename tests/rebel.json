@@ -1,0 +1,18 @@
+{
+  "client": {
+    "name": "Test client",
+    "instance": {
+      "url": "https://test.client.rebelmetrics.io"
+    },
+    "subscription": {
+      "started": "2024-11-01",
+      "ends": ""
+    }
+  },
+  "news": {
+    "2024-11-01": {
+      "heading": "New webinar about RebelMetrics",
+      "body": "Some text"
+    }
+  }
+}
