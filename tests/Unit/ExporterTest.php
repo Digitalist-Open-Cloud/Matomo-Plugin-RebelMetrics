@@ -30,7 +30,9 @@ class ExporterTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
-        // set up here if needed
+        parent::setUp();
+        ExporterTest::$fixture = new SomePageGoalVisitsWithConversions();
+        $this->engagementTrackerTag = new EngagementTrackerTag();
     }
 
     public function tearDown(): void

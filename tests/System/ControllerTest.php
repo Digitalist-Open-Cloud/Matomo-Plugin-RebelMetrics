@@ -1,15 +1,34 @@
 <?php
 
-namespace Piwik\Plugins\RebelMetrics\tests\Unit;
+/**
+ * The RebelMetrics plugin for Matomo.
+ *
+ * Copyright (C) 2024 Digitalist Open Cloud <cloud@digitalist.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
-use PHPUnit\Framework\TestCase;
+namespace Piwik\Plugins\RebelMetrics\tests\System;
+
+use Piwik\Tests\Framework\TestCase\SystemTestCase;
 use Piwik\Piwik;
 use Piwik\Plugins\RebelMetrics\Controller;
 use Piwik\Plugins\RebelMetrics\Rebel;
 use Piwik\Plugins\RebelMetrics\SystemSettings;
 use Piwik\Tests\Fixtures\SomePageGoalVisitsWithConversions;
 
-class ControllerTest extends TestCase
+class ControllerTest extends SystemTestCase
 {
     /**
      * @var SomePageGoalVisitsWithConversions
