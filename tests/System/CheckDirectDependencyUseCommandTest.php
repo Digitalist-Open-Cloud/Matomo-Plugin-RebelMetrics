@@ -29,9 +29,11 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class CheckDirectDependencyUseCommandTest extends SystemTestCase
 {
-    public function testCommand()
+    public function testDirectDependencies()
     {
-
+        if (version_compare(Version::VERSION, '5.0.3', '<=') && !file_exists(PIWIK_INCLUDE_PATH . '/plugins/TestRunner/Commands/CheckDirectDependencyUse.php')) {
+          $this->markTestSkipped('tests:check-direct-dependency-use is not available in this version');
+        }
         $pluginName = 'RebelMetrics';
         $checkDirectDependencyUse = new CheckDirectDependencyUse();
 
