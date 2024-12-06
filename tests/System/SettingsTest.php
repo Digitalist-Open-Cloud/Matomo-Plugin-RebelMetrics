@@ -50,9 +50,6 @@ class SettingsTest extends SystemTestCase
         $systemSettings->storageKey->setValue('D204FE21-A74B-4406-A26F-2CE050674E19');
         $systemSettings->storageSecret->setValue('E595DDAE-F8FE-4D3B-8A1C-A9A3B3FFA3DD');
 
-
-
-
         $systemSettings->save();
         $this->settings = new SystemSettings();
     }
@@ -66,6 +63,34 @@ class SettingsTest extends SystemTestCase
         $this->assertSame('D204FE21-A74B-4406-A26F-2CE050674E19', $this->settings->storageKey->getValue());
         $this->assertSame('E595DDAE-F8FE-4D3B-8A1C-A9A3B3FFA3DD', $this->settings->storageSecret->getValue());
     }
+
+    public function testToEnterWrongDate()
+    {
+        try {
+            $this->wrongDate();
+        } catch (\Exception $ex) {
+            $this->assertSame("Please enter a valid date in YYYY-MM-DD format for setting export date start for RebelMetrics.", $ex->getMessage());
+            return;
+        }
+        $this->fail("Exception was not thrown.");
+    }
+
+    public function testExportSettings()
+    {
+        $this->setExportDir();
+        $this->assertSame('/foo', $this->settings->exportDir->getValue());
+    }
+
+    public function setExportDir()
+    {
+        $this->settings->exportDir->setValue('/foo');
+    }
+
+    public function wrongDate()
+    {
+        $this->settings->historicalDataDate->setValue('2022222-999');
+    }
+
 
     private function makePluginSettings()
     {
