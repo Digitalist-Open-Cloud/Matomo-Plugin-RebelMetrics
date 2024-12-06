@@ -21,6 +21,8 @@
 
 namespace Piwik\Plugins\RebelMetrics\tests\Unit;
 
+use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
+
 /**
  * @group RebelMetrics
  * @group ExporterTest
@@ -28,11 +30,13 @@ namespace Piwik\Plugins\RebelMetrics\tests\Unit;
  */
 class ExporterTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var SomePageGoalVisitsWithConversions
+     */
+    public static $fixture;
     public function setUp(): void
     {
         parent::setUp();
-        ExporterTest::$fixture = new SomePageGoalVisitsWithConversions();
-        $this->engagementTrackerTag = new EngagementTrackerTag();
     }
 
     public function tearDown(): void
@@ -48,3 +52,5 @@ class ExporterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2, 1 + 1);
     }
 }
+
+ExporterTest::$fixture = new OneVisitorTwoVisits();
