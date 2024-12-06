@@ -6,7 +6,7 @@ on:
   push:
     branches: ["main"]
 jobs:
-  plugin:
+  PluginTests:
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
