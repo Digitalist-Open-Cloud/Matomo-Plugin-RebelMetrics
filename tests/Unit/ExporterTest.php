@@ -31,7 +31,7 @@ use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
 class ExporterTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var SomePageGoalVisitsWithConversions
+     * @var OneVisitorTwoVisits
      */
     public static $fixture;
     public function setUp(): void
@@ -52,5 +52,6 @@ class ExporterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2, 1 + 1);
     }
 }
-
+// phpcs:disable
 ExporterTest::$fixture = new OneVisitorTwoVisits();
+// phpcs:enable

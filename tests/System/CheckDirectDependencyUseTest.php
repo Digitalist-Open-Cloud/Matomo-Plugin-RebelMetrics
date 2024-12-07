@@ -21,18 +21,30 @@
 
 namespace Piwik\Plugins\RebelMetrics\tests\System;
 
-use Piwik\Plugins\TestRunner\Commands\CheckDirectDependencyUse;
 use Piwik\Tests\Framework\TestCase\SystemTestCase;
 use Piwik\Version;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Piwik\Plugins\TestRunner\Commands\CheckDirectDependencyUse;
 
-class CheckDirectDependencyUseCommandTest extends SystemTestCase
+/**
+ * @group RebelMetrics
+ * @group RebelMetricsDirectDependencyUse
+ * @group Plugins
+ */
+class CheckDirectDependencyUseTest extends SystemTestCase
 {
     public function testDirectDependencies()
     {
-        if (version_compare(Version::VERSION, '5.0.3', '<=') && !file_exists(PIWIK_INCLUDE_PATH . '/plugins/TestRunner/Commands/CheckDirectDependencyUse.php')) {
-          $this->markTestSkipped('tests:check-direct-dependency-use is not available in this version');
+        if (
+            version_compare(
+                Version::VERSION,
+                '5.0.3',
+                '<='
+            )
+                && !file_exists(PIWIK_INCLUDE_PATH . '/plugins/TestRunner/Commands/CheckDirectDependencyUse.php')
+        ) {
+            $this->markTestSkipped('tests:check-direct-dependency-use is not available in this version');
         }
         $pluginName = 'RebelMetrics';
         $checkDirectDependencyUse = new CheckDirectDependencyUse();
@@ -51,7 +63,7 @@ class CheckDirectDependencyUseCommandTest extends SystemTestCase
 
         $this->assertEquals([
             'Symfony\Component\Console' => [
-                'RebelMetrics/tests/System/CheckDirectDependencyUseCommandTest.php'
+                'RebelMetrics/tests/System/CheckDirectDependencyUseTest.php'
             ],
         ], $checkDirectDependencyUse->usesFoundList[$pluginName]);
     }

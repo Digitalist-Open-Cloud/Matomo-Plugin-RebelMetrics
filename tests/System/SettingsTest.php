@@ -69,7 +69,9 @@ class SettingsTest extends SystemTestCase
         try {
             $this->wrongDate();
         } catch (\Exception $ex) {
+            // phpcs:disable
             $this->assertSame("Please enter a valid date in YYYY-MM-DD format for setting export date start for RebelMetrics.", $ex->getMessage());
+            // phpcs:enable
             return;
         }
         $this->fail("Exception was not thrown.");
@@ -100,4 +102,6 @@ class SettingsTest extends SystemTestCase
         return $settings;
     }
 }
+// phpcs:disable
 SettingsTest::$fixture = new OneVisitorTwoVisits();
+// phpcs:disable
