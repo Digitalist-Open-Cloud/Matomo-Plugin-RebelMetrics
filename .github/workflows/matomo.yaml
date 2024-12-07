@@ -34,10 +34,10 @@ jobs:
           lfs: true
           persist-credentials: false
       - name: running tests
-        uses: matomo-org/github-action-tests@main
+        uses: Digitalist-Open-Cloud/Matomo-github-action-tests@main
         with:
           plugin-name: 'RebelMetrics'
-          matomo-test-branch: 'maximum_supported_matomo'
+          matomo-test-branch: 'minimum_required_matomo'
           test-type: 'UI'
           php-version: '7.2'
           node-version: '16'
