@@ -39,5 +39,5 @@ jobs:
           plugin-name: 'RebelMetrics'
           matomo-test-branch: 'maximum_supported_matomo'
           test-type: 'UI'
-          php-version: '8.2'
+          php-version: '7.2'
           node-version: '16'
