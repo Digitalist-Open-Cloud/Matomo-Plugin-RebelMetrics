@@ -22,7 +22,7 @@
 namespace Piwik\Plugins\RebelMetrics;
 
 use Piwik\Plugin\Tasks as Task;
-use Psr\Log\LoggerInterface;
+use Piwik\Log\LoggerInterface;
 use Piwik\Container\StaticContainer;
 use Exception;
 use Piwik\Scheduler\RetryableException;
@@ -36,7 +36,7 @@ class Tasks extends Task
     private $settings;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var \Piwik\Log\LoggerInterface
      */
     protected $logger;
 
