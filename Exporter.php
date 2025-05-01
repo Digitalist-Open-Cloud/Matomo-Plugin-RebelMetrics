@@ -38,7 +38,7 @@ class Exporter
     private $settings;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var \Piwik\Log\LoggerInterface
      */
     protected $logger;
 
@@ -90,7 +90,6 @@ class Exporter
         } catch (Exception $e) {
             $this->logger->error('An error occurred while writing to the file: ' . $e->getMessage());
         } finally {
-            // Close the file after writing
             fclose($file);
         }
 
